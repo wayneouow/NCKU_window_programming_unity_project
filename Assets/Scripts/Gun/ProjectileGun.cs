@@ -32,7 +32,7 @@ public class ProjectileGun : MonoBehaviour
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammunitionDisplay;
 
-    //bug fixing :D
+    //bug fixing 
     public bool allowInvoke = true;
 
     private void Awake()

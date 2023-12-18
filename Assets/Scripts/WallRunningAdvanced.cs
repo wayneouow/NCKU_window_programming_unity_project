@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class WallRunningAdvanced : MonoBehaviour
     public float maxWallRunTime;
     private float wallRunTimer;
 
+    public float dutchAngle = 10;
     [Header("Input")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode upwardsRunKey = KeyCode.LeftShift;
@@ -43,6 +45,7 @@ public class WallRunningAdvanced : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     public PlayerCam cam;
+    public CinemachineVirtualCamera vc;
     private PlayerMovementAdvanced pm;
     private LedgeGrabbing lg;
     private Rigidbody rb;
@@ -139,6 +142,10 @@ public class WallRunningAdvanced : MonoBehaviour
         cam.DoFov(90f);
         if (wallLeft) cam.DoTilt(-5f);
         if (wallRight) cam.DoTilt(5f);
+
+        // VC effects
+        if (wallLeft) vc.m_Lens.Dutch = -dutchAngle;
+        if (wallRight) vc.m_Lens.Dutch = dutchAngle;
     }
 
     private void WallRunningMovement()
@@ -177,6 +184,9 @@ public class WallRunningAdvanced : MonoBehaviour
         // reset camera effects
         cam.DoFov(80f);
         cam.DoTilt(0f);
+
+        vc.m_Lens.Dutch = 0f;
+
     }
 
     private void WallJump()

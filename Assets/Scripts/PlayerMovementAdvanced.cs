@@ -92,6 +92,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void Start()
     {
+
         climbingScriptDone = GetComponent<ClimbingDone>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
