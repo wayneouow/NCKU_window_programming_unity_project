@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/GameDevLab.unity
+    path: Assets/Sherbbs Particle Collection/Scenes/DemoScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Movement.unity
+    guid: 981c0833db4a718448fadb9a604bcd92
+  - enabled: 1
+    path: Assets/Scenes/Winter.unity
+    guid: 77047ab53cbc6d8469ab3086c5109e91
   m_configObjects: {}
