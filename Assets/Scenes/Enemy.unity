@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 223088298}
   - component: {fileID: 223088297}
   - component: {fileID: 223088302}
+  - component: {fileID: 223088303}
   m_Layer: 6
   m_Name: TempPlayer
   m_TagString: Player
@@ -175,6 +176,7 @@ MonoBehaviour:
   MovingDirection: {x: 0, y: 0, z: 0}
   JumpingForce: 500
   movingSpeed: 10
+  health: 100
 --- !u!54 &223088298
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -285,7 +287,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab904a4d4fe90354c86a7e8cb363c9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fakePrefab: {fileID: 4932088507883938021, guid: ec2091d32b2c7bb40b84de973636994a,
+    type: 3}
   realPrefab: {fileID: 4932088507883938021, guid: 0e5709a7ddb77924090c112cf73bb98a,
+    type: 3}
+  prefabLifetime: 4
+--- !u!114 &223088303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223088295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd5e4364cc8ab648aa53cccb0794026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fakePrefab: {fileID: 7986504087968017091, guid: 353b06e32fb155d40a5bf5c6f8ed54dd,
+    type: 3}
+  realPrefab: {fileID: 7986504087968017091, guid: 12a56ee4630040c4eb17ae9707ed4cef,
     type: 3}
   prefabLifetime: 4
 --- !u!1 &671713955

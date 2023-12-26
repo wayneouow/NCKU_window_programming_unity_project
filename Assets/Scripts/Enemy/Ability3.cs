@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
 
-public class Ability2 : MonoBehaviour
+public class Ability3 : MonoBehaviour
 {
-    // Ability 2 : slow circle
+    // Ability 3 : heal circle
     public GameObject fakePrefab;
     public GameObject realPrefab;  // real prefab
     private GameObject fakePreview; // preview 
     private Material fakeMaterial;  // preview material
     public float prefabLifetime = 4f; // duration
-
     public bool show = false;
     public bool cancle = false;
     // Start is called before the first frame update
@@ -31,7 +29,7 @@ public class Ability2 : MonoBehaviour
     void Update()
     {
         // update preview position
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             show = true;
             cancle = false;
@@ -40,6 +38,7 @@ public class Ability2 : MonoBehaviour
         {
             show = false;
             cancle = true;
+            //好像要摧毀prefab
         }
         if (show && !(cancle))
         {
@@ -48,11 +47,10 @@ public class Ability2 : MonoBehaviour
         // click to make real prefab
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("產生緩速圈");
+            Debug.Log("產生治療圈");
             GenerateRealPrefab();
             show = false;
         }
-        
     }
 
     void UpdateFakePreviewPosition()
@@ -108,5 +106,7 @@ public class Ability2 : MonoBehaviour
         // 套用新材質
         fakePreview.GetComponent<Renderer>().material = newMaterial;
     }
+
+
 
 }
