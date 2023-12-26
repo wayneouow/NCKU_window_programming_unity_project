@@ -9,6 +9,14 @@ public class playerscontrol : MonoBehaviour
     public float JumpingForce;
     Rigidbody rb;
     [SerializeField] float movingSpeed = 10f;
+    public float health=100f;
+
+    //heal
+    public bool isHealed = false;
+    public bool healtimer = false;
+    public float healStartTime = 0f;
+    private float healDuration = 4f;
+    private int healcount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +35,12 @@ public class playerscontrol : MonoBehaviour
         {
             rb.AddForce(JumpingForce * Vector3.up);
         }
+
+        if (isHealed)
+        {
+            PlayerHealing(10);
+        }
+
     }
     void Move()
     {
@@ -35,5 +49,30 @@ public class playerscontrol : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * movingSpeed * Time.deltaTime;
         transform.Translate(movement, Space.Self);
+    }
+
+    void PlayerHealing(float hp)
+    {
+        healcount++;
+       
+        isHealed = false;
+        if (healtimer)
+        {
+            healStartTime += Time.deltaTime;
+            // 繼續緩速中
+            health += hp;
+            //Debug.Log("敵人停止");
+
+            Debug.Log("玩家正在回血，血量=" + health);
+            if (healStartTime >= healDuration)
+            {
+                // 效果結束
+               
+                healtimer = false;
+                healStartTime = 0f;
+                healDuration = 4f;
+                healcount = 0;
+            }
+        }
     }
 }

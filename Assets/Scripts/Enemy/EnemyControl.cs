@@ -26,8 +26,9 @@ public class EnemyControl : MonoBehaviour
     // Effect by ability
     // 2:
     public bool isSlowed = false;
-    private float slowStartTime = 0f;
-    private float slowDuration = 5f;
+    public bool slowtimer = false;
+    public float slowStartTime = 0f;
+    private float slowDuration = 4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,19 +99,22 @@ public class EnemyControl : MonoBehaviour
         if (isSlowed)
         {
             //被緩速
-
-            if (Time.time < slowStartTime + slowDuration)
+            if(slowtimer)
             {
+                slowStartTime += Time.deltaTime;
                 // 繼續緩速中
+                //Debug.Log("敵人停止");
                 navAgent.isStopped = true;
-            }
-            else
-            {
-                // 緩速結束，恢復正常速度
-                navAgent.isStopped = false;
-                isSlowed = false;
-
-
+                if (slowStartTime >= slowDuration)
+                {
+                    // 緩速結束，恢復正常速度
+                    Debug.Log("敵人恢復");
+                    navAgent.isStopped = false;
+                    isSlowed = false;
+                    slowtimer = false;
+                    slowStartTime = 0f;
+                    slowDuration = 4f;
+                }
             }
 
         }
