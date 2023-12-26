@@ -16,7 +16,7 @@ public class playerscontrol : MonoBehaviour
     public bool healtimer = false;
     public float healStartTime = 0f;
     private float healDuration = 4f;
-
+    private int healcount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,21 +53,25 @@ public class playerscontrol : MonoBehaviour
 
     void PlayerHealing(float hp)
     {
-        
+        healcount++;
+       
+        isHealed = false;
         if (healtimer)
         {
             healStartTime += Time.deltaTime;
             // 繼續緩速中
-            //Debug.Log("敵人停止");
             health += hp;
-            Debug.Log("玩家正在回血，血量=" + hp);
+            //Debug.Log("敵人停止");
+
+            Debug.Log("玩家正在回血，血量=" + health);
             if (healStartTime >= healDuration)
             {
                 // 效果結束
-                isHealed = false;
+               
                 healtimer = false;
                 healStartTime = 0f;
                 healDuration = 4f;
+                healcount = 0;
             }
         }
     }

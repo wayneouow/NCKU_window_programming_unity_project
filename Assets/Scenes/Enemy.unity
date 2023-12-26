@@ -177,6 +177,9 @@ MonoBehaviour:
   JumpingForce: 500
   movingSpeed: 10
   health: 100
+  isHealed: 0
+  healtimer: 0
+  healStartTime: 0
 --- !u!54 &223088298
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -223,8 +226,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.4920262, z: 1}
+  m_Center: {x: 0, y: -0.06271187, z: 0}
 --- !u!23 &223088300
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -292,6 +295,8 @@ MonoBehaviour:
   realPrefab: {fileID: 4932088507883938021, guid: 0e5709a7ddb77924090c112cf73bb98a,
     type: 3}
   prefabLifetime: 4
+  show2: 0
+  cancle2: 0
 --- !u!114 &223088303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +314,8 @@ MonoBehaviour:
   realPrefab: {fileID: 7986504087968017091, guid: 12a56ee4630040c4eb17ae9707ed4cef,
     type: 3}
   prefabLifetime: 4
+  show: 0
+  cancle: 0
 --- !u!1 &671713955
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +720,7 @@ GameObject:
   - component: {fileID: 1878349766}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

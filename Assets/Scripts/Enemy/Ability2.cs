@@ -12,8 +12,8 @@ public class Ability2 : MonoBehaviour
     private Material fakeMaterial;  // preview material
     public float prefabLifetime = 4f; // duration
 
-    public bool show = false;
-    public bool cancle = false;
+    public bool show2 = false;
+    public bool cancle2 = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,24 +33,25 @@ public class Ability2 : MonoBehaviour
         // update preview position
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            show = true;
-            cancle = false;
+            show2 = true;
+            cancle2 = false;
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            show = false;
-            cancle = true;
+            show2 = false;
+            cancle2 = true;
+            fakePreview.SetActive(false);
         }
-        if (show && !(cancle))
+        if (show2 && !(cancle2))
         {
             UpdateFakePreviewPosition();
         }
         // click to make real prefab
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && show2)
         {
             Debug.Log("²£¥Í½w³t°é");
             GenerateRealPrefab();
-            show = false;
+            show2 = false;
         }
         
     }

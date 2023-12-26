@@ -39,13 +39,14 @@ public class Ability3 : MonoBehaviour
             show = false;
             cancle = true;
             //好像要摧毀prefab
+            fakePreview.SetActive(false);
         }
         if (show && !(cancle))
         {
             UpdateFakePreviewPosition();
         }
         // click to make real prefab
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && show )
         {
             Debug.Log("產生治療圈");
             GenerateRealPrefab();
