@@ -179,22 +179,22 @@ public class PlayerMovementAdvanced : MonoBehaviour
         else if (activeGrapple)
         {
             state = MovementState.grappling;
-            moveSpeed = sprintSpeed;
+            desiredMoveSpeed = swingSpeed;
         }
 
         // Mode - Swinging
         else if (swinging)
         {
             state = MovementState.swinging;
-            moveSpeed = swingSpeed;
+            desiredMoveSpeed = swingSpeed;
         }
 
-        // Mode - Unlimited
-        else if (unlimited)
-        {
-            state = MovementState.unlimited;
-            desiredMoveSpeed = 999f;
-        }
+        //// Mode - Unlimited
+        //else if (unlimited)
+        //{
+        //    state = MovementState.unlimited;
+        //    desiredMoveSpeed = 999f;
+        //}
 
         // Mode - Vaulting
         else if (vaulting)
