@@ -316,7 +316,7 @@ public class PlayerMovementGrappling : MonoBehaviour
         Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) 
             + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
 
-        return velocityXZ + velocityY;
+        return 5f*velocityXZ + velocityY;
     }
 
     #region Text & Debugging

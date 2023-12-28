@@ -8,10 +8,10 @@ public class SwingingDone : MonoBehaviour
     public LineRenderer lr;
     public Transform gunTip, cam, player;
     public LayerMask whatIsGrappleable;
-    public PlayerMovementGrappling pm;
+    public PlayerMovementAdvanced pm;
 
     [Header("Swinging")]
-    private float maxSwingDistance = 25f;
+    public float maxSwingDistance = 25f;
     private Vector3 swingPoint;
     private SpringJoint joint;
 

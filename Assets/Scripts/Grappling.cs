@@ -14,6 +14,8 @@ public class Grappling : MonoBehaviour
     [Header("Grappling")]
     public float maxGrappleDistance;
     public float grappleDelayTime;
+    public float grappleFreezeTime;
+    public float grapplingTime;
     public float overshootYAxis;
 
     private Vector3 grapplePoint;
@@ -42,14 +44,14 @@ public class Grappling : MonoBehaviour
 
     private void LateUpdate()
     {
-        // if (grappling)
-        //    lr.SetPosition(0, gunTip.position);
+        if (grappling)
+            lr.SetPosition(0, gunTip.position);
     }
 
     private void StartGrapple()
     {
         if (grapplingCdTimer > 0) return;
-
+        GetComponent<SwingingDone>().StopSwing();
         grappling = true;
 
         pm.freeze = true;
@@ -59,7 +61,7 @@ public class Grappling : MonoBehaviour
         {
             grapplePoint = hit.point;
 
-            Invoke(nameof(ExecuteGrapple), grappleDelayTime);
+            Invoke(nameof(ExecuteGrapple), grappleFreezeTime);
         }
         else
         {
@@ -68,8 +70,8 @@ public class Grappling : MonoBehaviour
             Invoke(nameof(StopGrapple), grappleDelayTime);
         }
 
-        //lr.enabled = true;
-        //lr.SetPosition(1, grapplePoint);
+        lr.enabled = true;
+        lr.SetPosition(1, grapplePoint);
     }
 
     private void ExecuteGrapple()
@@ -83,9 +85,9 @@ public class Grappling : MonoBehaviour
 
         if (grapplePointRelativeYPos < 0) highestPointOnArc = overshootYAxis;
 
-        //pm.JumpToPosition(grapplePoint, highestPointOnArc);
+        pm.JumpToPosition(grapplePoint, highestPointOnArc);
 
-        Invoke(nameof(StopGrapple), 1f);
+        Invoke(nameof(StopGrapple), grapplingTime);
     }
 
     public void StopGrapple()
@@ -96,7 +98,7 @@ public class Grappling : MonoBehaviour
 
         grapplingCdTimer = grapplingCd;
 
-        //lr.enabled = false;
+        lr.enabled = false;
     }
 
     public bool IsGrappling()
