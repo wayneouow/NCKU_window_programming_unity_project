@@ -15,13 +15,23 @@ public class EnemyControl : MonoBehaviour
     public float sightRange;
     public float attackRange;
     public int damage;
+    public int hurt_damage;
+    //animation
     public Animator animator;
-    public ParticleSystem hitEffect;
+
+    public GameObject hitEffectPrefab;
+   // public ParticleSystem hitEffect;
+    public bool walk = false;
+    public bool run = false;
+
 
     private Vector3 walkPoint;
     private bool walkPointSet;
     private bool alreadyAttacked;
     private bool takeDamage;
+
+    //wave
+    //public SpawnEnemy scriptAReference;
 
     // Effect by ability
     // 2:
@@ -33,7 +43,7 @@ public class EnemyControl : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        player = GameObject.Find("TempPlayer").transform;
+        player = GameObject.Find("Player").transform;
         navAgent = GetComponent<NavMeshAgent>();
         originalSpeed = navAgent.acceleration;
     }
@@ -46,10 +56,14 @@ public class EnemyControl : MonoBehaviour
 
         if (!playerInSightRange && !playerInAttackRange)
         {
+            walk = true;
+            run = false;
             Patroling();
         }
         else if (playerInSightRange && !playerInAttackRange)
         {
+            walk = false;
+            run = true;
             ChasePlayer();
         }
         else if (playerInAttackRange && playerInSightRange)
@@ -58,6 +72,8 @@ public class EnemyControl : MonoBehaviour
         }
         else if (!playerInSightRange && takeDamage)
         {
+            walk = false;
+            run = true;
             ChasePlayer();
         }
     }
@@ -75,7 +91,7 @@ public class EnemyControl : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         //animator.SetFloat("Velocity", 0.2f);
-
+        
         if (distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
@@ -121,6 +137,7 @@ public class EnemyControl : MonoBehaviour
         else
         {
             navAgent.SetDestination(player.position);
+            animator.SetBool("Run", run);
             //animator.SetFloat("Velocity", 0.6f);
             navAgent.isStopped = false; // Add this line     
         }
@@ -136,7 +153,7 @@ public class EnemyControl : MonoBehaviour
         {
             transform.LookAt(player.position);
             alreadyAttacked = true;
-            //animator.SetBool("Attack", true);
+            animator.SetTrigger("Attack");
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
 
             RaycastHit hit;
@@ -160,25 +177,43 @@ public class EnemyControl : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+        animator.SetTrigger("Attack");
         //animator.SetBool("Attack", false);
     }
 
     public void TakeDamage(float damage)
     {
+        animator.SetTrigger("EnemyHurt");
+        Debug.Log("受到傷害：" + hurt_damage);
         health -= damage;
-        hitEffect.Play();
-        StartCoroutine(TakeDamageCoroutine());
+        Debug.Log("當前血量：" + health);
+        GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+        //hitEffect.Play();
+        Destroy(hitEffect, 1f);
+        //StartCoroutine(TakeDamageCoroutine());
 
         if (health <= 0)
         {
-            Invoke(nameof(DestroyEnemy), 0.5f);
+            animator.SetTrigger("Die");
+            //scriptAReference.score += 1;           
+            // Debug.Log(scriptAReference.score);
+            Die();
+            //Invoke(nameof(DestroyEnemy), 0.5f);
+            Debug.Log("敵人死掉");
         }
     }
-
+    void Die()
+    {
+        // Perform any death-related logic here (e.g., play death animation, drop items, etc.)
+        
+        // Destroy the enemy GameObject
+        Destroy(gameObject,2f);
+    }
+    /*
     private IEnumerator TakeDamageCoroutine()
     {
         takeDamage = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         takeDamage = false;
     }
 
@@ -192,7 +227,7 @@ public class EnemyControl : MonoBehaviour
         //animator.SetBool("Dead", true);
         yield return new WaitForSeconds(1.8f);
         Destroy(gameObject);
-    }
+    }*/
 
     private void OnDrawGizmosSelected()
     {

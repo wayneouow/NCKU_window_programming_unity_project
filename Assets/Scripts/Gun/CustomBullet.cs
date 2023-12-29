@@ -57,11 +57,15 @@ public class CustomBullet : MonoBehaviour
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
         for (int i = 0; i < enemies.Length; i++)
         {
-            //Get component of enemy and call Take Damage
-
+          
             //Just an example!
             ///enemies[i].GetComponent<ShootingAi>().TakeDamage(explosionDamage);
-
+           /*
+            if (enemies[i].CompareTag("Enemy")) // Assuming the enemy has the tag "Enemy"
+            {
+                // Example: Deal damage to the enemy
+                enemies[i].GetComponent<EnemyControl>().TakeDamage(50f);
+            }*/
             //Add explosion force (if enemy has a rigidbody)
             if (enemies[i].GetComponent<Rigidbody>())
                 enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
@@ -70,6 +74,7 @@ public class CustomBullet : MonoBehaviour
         //Add a little delay, just to make sure everything works fine
         Invoke("Delay", 0.05f);
     }
+
     private void Delay()
     {
         Destroy(gameObject);
@@ -108,4 +113,18 @@ public class CustomBullet : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRange);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // 如果碰撞到敌人，调用敌人的 TakeDamage 方法
+        EnemyControl enemy = other.GetComponent<EnemyControl>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(50);
+            //Destroy(gameObject); // 刀击中敌人后销毁刀
+            Debug.Log("敵人受傷被攻擊");
+        }
+    }
+
+
 }
