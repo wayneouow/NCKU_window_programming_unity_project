@@ -30,8 +30,9 @@ public class PickUpController : MonoBehaviour
             gunScript.enabled = true;
             rb.isKinematic = true;
             coll.isTrigger = true;
-            slotFull = true;
+            //slotFull = true;
         }
+
     }
 
     private void Update()

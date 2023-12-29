@@ -7,6 +7,7 @@ public class ItemThrowing : MonoBehaviour
 {
     [Header("References")]
     public Transform cam;
+    public GameObject handToThrow;
     public Transform attackPoint;
     public GameObject objectToThrow;
 
@@ -28,10 +29,14 @@ public class ItemThrowing : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(throwKey) && readyToThrow && totalThrows > 0)
+        if (handToThrow.activeSelf)
         {
-            Throw();
+            if (Input.GetKeyDown(throwKey) && readyToThrow && totalThrows > 0)
+            {
+                Throw();
+            }
         }
+        
     }
 
     private void Throw()
