@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.ProBuilder;
 
 public class EnemyControl : MonoBehaviour
 {
@@ -39,6 +40,10 @@ public class EnemyControl : MonoBehaviour
     public bool slowtimer = false;
     public float slowStartTime = 0f;
     private float slowDuration = 4f;
+
+    //attack
+    public GameObject projectile;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -168,8 +173,14 @@ public class EnemyControl : MonoBehaviour
                    playerHUD.takeDamage(damage);
                 }
                  */
-                Debug.Log("玩家受傷");
+                //Debug.Log("玩家受傷");
             }
+            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
+            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            Debug.Log("敵人射出東西");
+            Destroy(rb, 10f);
+
         }
     }
 
@@ -194,6 +205,7 @@ public class EnemyControl : MonoBehaviour
 
         if (health <= 0)
         {
+
             animator.SetTrigger("Die");
             //scriptAReference.score += 1;           
             // Debug.Log(scriptAReference.score);
@@ -205,7 +217,12 @@ public class EnemyControl : MonoBehaviour
     void Die()
     {
         // Perform any death-related logic here (e.g., play death animation, drop items, etc.)
-        
+        //敵人死掉不要再被子彈打到
+        CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
+        if (capsuleCollider != null)
+        {
+            capsuleCollider.enabled = false;
+        }
         // Destroy the enemy GameObject
         Destroy(gameObject,2f);
     }

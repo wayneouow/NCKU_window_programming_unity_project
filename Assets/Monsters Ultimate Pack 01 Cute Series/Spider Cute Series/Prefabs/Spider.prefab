@@ -1381,6 +1381,8 @@ MonoBehaviour:
   isSlowed: 0
   slowtimer: 0
   slowStartTime: 0
+  projectile: {fileID: 4109064841345302812, guid: 2a409ab125c5216449bc5f005ec045f0,
+    type: 3}
 --- !u!136 &9005118340726947881
 CapsuleCollider:
   m_ObjectHideFlags: 0

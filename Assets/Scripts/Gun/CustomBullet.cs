@@ -124,7 +124,16 @@ public class CustomBullet : MonoBehaviour
             //Destroy(gameObject); // 刀击中敌人后销毁刀
             Debug.Log("敵人受傷被攻擊");
         }
-    }
 
+        Enemy2 enemy2 = other.GetComponent<Enemy2>();
+        if (enemy2 != null)
+        {
+            enemy2.TakeDamage(50);
+            //Destroy(gameObject); // 刀击中敌人后销毁刀
+            Debug.Log("敵人2受傷被攻擊");
+        }
+
+    }
+    
 
 }

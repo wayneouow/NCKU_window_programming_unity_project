@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class playerscontrol : MonoBehaviour
 {
+    /*
     //°Ñ¼Æ
     public Vector3 MovingDirection;
     public float JumpingForce;
-    Rigidbody rb;
-    [SerializeField] float movingSpeed = 10f;
+    */
+    //Rigidbody rb;
+    // [SerializeField] float movingSpeed = 10f;
+    
     public float health=100f;
 
     //heal
@@ -20,13 +23,14 @@ public class playerscontrol : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         //animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         //WASD
         Move();
         //Space
@@ -35,13 +39,14 @@ public class playerscontrol : MonoBehaviour
         {
             rb.AddForce(JumpingForce * Vector3.up);
         }
-
+        */
         if (isHealed)
         {
             PlayerHealing(10);
         }
 
     }
+    /*
     void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -49,7 +54,7 @@ public class playerscontrol : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * movingSpeed * Time.deltaTime;
         transform.Translate(movement, Space.Self);
-    }
+    }*/
 
     void PlayerHealing(float hp)
     {
