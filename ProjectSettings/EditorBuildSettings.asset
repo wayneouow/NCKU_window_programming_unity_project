@@ -12,9 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Movement.unity
     guid: 981c0833db4a718448fadb9a604bcd92
   - enabled: 1
-    path: Assets/Scenes/Winter.unity
+    path: Assets/Scenes/map/Winter.unity
     guid: 77047ab53cbc6d8469ab3086c5109e91
   - enabled: 1
-    path: Assets/Scenes/Desert.unity
+    path: Assets/Scenes/map/Desert.unity
     guid: 539f7e97526e1de46b38a63dcb0d34ad
+  - enabled: 1
+    path: Assets/Scenes/map/Forest.unity
+    guid: 4c865000e87ff0941b21081980f11a46
+  - enabled: 1
+    path: Assets/Scenes/SelectMap.unity
+    guid: 23941117c3d758c4daaa3e6f12dbbf9b
   m_configObjects: {}

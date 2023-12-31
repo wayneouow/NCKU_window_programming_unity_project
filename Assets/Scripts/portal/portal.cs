@@ -13,6 +13,5 @@ public class portal : MonoBehaviour
         {
             SceneManager.LoadScene(scenename);
         }
-        Debug.Log("123");
     }
 }

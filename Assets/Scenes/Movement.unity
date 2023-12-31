@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: aaaeb9366a9d4d042af1aace3ada3be2,
+    type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 7c47718263f221c458f2e6fccaba1773,
     type: 2}
 --- !u!196 &4
@@ -1158,7 +1159,7 @@ Transform:
   m_GameObject: {fileID: 17629456}
   serializedVersion: 2
   m_LocalRotation: {x: 0.04987613, y: 0.7230217, z: -0.052271735, w: 0.68703693}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 16.505342, y: -0.25, z: 1.0701745}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33654,13 +33655,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766924022}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00976081, y: -0.5479061, z: 0.0012036627, w: 0.8364821}
-  m_LocalPosition: {x: 4.18, y: -8.63, z: 0.71}
+  m_LocalRotation: {x: -0.03737964, y: -0.5475706, z: -0.01779146, w: 0.8357348}
+  m_LocalPosition: {x: 4.1800213, y: -8.63, z: 0.7100239}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 928538315}
-  m_LocalEulerAnglesHint: {x: 1.011, y: -66.455, z: -0.498}
+  m_LocalEulerAnglesHint: {x: -4.701, y: -66.492, z: 0.644}
 --- !u!199 &766924024
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -43231,15 +43232,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928538314}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.4027025, z: -0, w: 0.91533095}
-  m_LocalPosition: {x: 82.058, y: 12.404318, z: 22.64}
+  m_LocalRotation: {x: -0, y: 0.9541773, z: -0, w: 0.2992421}
+  m_LocalPosition: {x: 85.727104, y: 12.404318, z: 28.587723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1846663780}
   - {fileID: 766924023}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -47.494, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 145.176, z: 0}
 --- !u!43 &944738000
 Mesh:
   m_ObjectHideFlags: 0
@@ -43984,7 +43985,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 16.505342, y: -0.25, z: 1.0701745}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -64927,7 +64928,7 @@ Transform:
   m_GameObject: {fileID: 1623225821}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.032450654, z: -0, w: 0.9994734}
-  m_LocalPosition: {x: 53.61, y: 2.25, z: 24.23}
+  m_LocalPosition: {x: 70.15, y: 2.25, z: 24.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -74130,7 +74131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4028c98198c77d54692374cd01f7611d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: Winter
+  scenename: SelectMap
 --- !u!222 &1846663782
 CanvasRenderer:
   m_ObjectHideFlags: 0
