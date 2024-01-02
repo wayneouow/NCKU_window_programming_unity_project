@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Sherbbs Particle Collection/Scenes/DemoScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/Scenes/gameMenu.unity
+    guid: 56ed1ae2115f3a9488964d316aee14ab
+  - enabled: 1
     path: Assets/Scenes/Movement.unity
     guid: 981c0833db4a718448fadb9a604bcd92
+  - enabled: 1
+    path: Assets/Scenes/SelectMap.unity
+    guid: 23941117c3d758c4daaa3e6f12dbbf9b
   - enabled: 1
     path: Assets/Scenes/map/Winter.unity
     guid: 77047ab53cbc6d8469ab3086c5109e91
@@ -20,7 +26,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/map/Forest.unity
     guid: 4c865000e87ff0941b21081980f11a46
-  - enabled: 1
-    path: Assets/Scenes/SelectMap.unity
-    guid: 23941117c3d758c4daaa3e6f12dbbf9b
   m_configObjects: {}
