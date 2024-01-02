@@ -8,7 +8,7 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] GameObject enemy1Prefab;
     [SerializeField] GameObject enemy2Prefab;
     [SerializeField] GameObject enemy3Prefab;
-
+    [SerializeField] GameObject enemy4Prefab;
 
     [SerializeField] int numberOfEnemiesToSpawn;
     public float spawnInterval = 20f;
@@ -25,6 +25,7 @@ public class SpawnEnemy : MonoBehaviour
         StartCoroutine(SpawnEnemies_1());
         StartCoroutine(SpawnEnemies_2());
         StartCoroutine(SpawnEnemies_3());
+        StartCoroutine(SpawnEnemies_4());
     }
 
     IEnumerator SpawnEnemies_1()
@@ -53,6 +54,16 @@ public class SpawnEnemy : MonoBehaviour
         for (int i = 0; i < numberOfEnemiesToSpawn; i++)
         {
             Spawn_Enemy3();
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+    IEnumerator SpawnEnemies_4()
+    {
+        //20秒後
+        yield return new WaitForSeconds(30f);
+        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        {
+            Spawn_Enemy4();
             yield return new WaitForSeconds(spawnInterval);
         }
     }
@@ -94,6 +105,19 @@ public class SpawnEnemy : MonoBehaviour
 
         // 生成敵人
         Instantiate(enemy3Prefab, randomPosition, Quaternion.identity);
+    }
+    void Spawn_Enemy4()
+    {
+        // 在玩家附近隨機生成敵人的位置
+        Vector3 randomPosition = Random.insideUnitSphere * spawnRadius;
+        //randomPosition += PlayerManager.instance.player.transform.position;
+        GameObject player = GameObject.FindWithTag("Player");
+        randomPosition += player.transform.position;
+        // 限制 Y 軸高度，可以根據實際情況調整
+        randomPosition.y = 0f;
+
+        // 生成敵人
+        Instantiate(enemy4Prefab, randomPosition, Quaternion.identity);
     }
 
     // Update is called once per frame

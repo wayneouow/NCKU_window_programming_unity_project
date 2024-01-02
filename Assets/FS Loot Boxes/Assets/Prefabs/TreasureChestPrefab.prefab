@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 7105609901951967481}
   - component: {fileID: 3183830665579744510}
   m_Layer: 0
-  m_Name: TreasureChestPrefab 1
+  m_Name: TreasureChestPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a88f58d3ce8b2d49b774f0ecbf6335e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 4487655533802913008, guid: 156da4a8643fc404e99090f7d5706bd7, type: 3}
+  canvas: {fileID: 3517728614314510215, guid: 6ff083f96ccc150469a9686fab32a52b, type: 3}
 --- !u!1 &3335560088448457042
 GameObject:
   m_ObjectHideFlags: 0

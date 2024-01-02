@@ -26,8 +26,10 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
+        GameObject canvasObject = GameObject.FindWithTag("rewardtag");
+        Canvas canvas = canvasObject.GetComponent<Canvas>();
         canvas.enabled = false;
-        
+       
         //this.transform.localScale = canvasScale;
         InitializeSkillList();
         // 生成隨機技能並顯示
@@ -38,6 +40,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
+
         if (canvas.enabled == true)
         {
             isShow = true;
@@ -114,7 +117,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     void DisplaySkills()
     {
         //海克斯1
-        GameObject canvasObject = GameObject.Find("hex1");
+        GameObject canvasObject = GameObject.FindWithTag("hex1");
        
        
         if (canvasObject != null)
@@ -135,7 +138,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
                 Debug.Log("not found on Canvas");
             }
         }
-        GameObject canvasObject2 = GameObject.Find("hex2");
+        GameObject canvasObject2 = GameObject.FindWithTag("hex2");
 
         if (canvasObject2 != null)
         {
@@ -155,7 +158,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
                 Debug.Log("not found on Canvas");
             }
         }
-        GameObject canvasObject3 = GameObject.Find("hex3");
+        GameObject canvasObject3 = GameObject.FindWithTag("hex3");
         if (canvasObject3 != null)
         {
 
@@ -256,10 +259,10 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     }
     private void HandleMouseScroll(float scrollValue)
     {
-        GameObject select_image = GameObject.Find("select_image");
-        GameObject canvasObject = GameObject.Find("hex1");
-        GameObject canvasObject2 = GameObject.Find("hex2");
-        GameObject canvasObject3 = GameObject.Find("hex3");
+        GameObject select_image = GameObject.FindWithTag("select_image");
+        GameObject canvasObject = GameObject.FindWithTag("hex1");
+        GameObject canvasObject2 = GameObject.FindWithTag("hex2");
+        GameObject canvasObject3 = GameObject.FindWithTag("hex3");
         if (scrollValue > 0f)
         {
             Debug.Log("向上滾動");

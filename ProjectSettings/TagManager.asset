@@ -8,6 +8,11 @@ TagManager:
   - FxTemporaire
   - Bullet
   - Enemy
+  - hex1
+  - hex2
+  - hex3
+  - select_image
+  - rewardtag
   layers:
   - Default
   - TransparentFX
