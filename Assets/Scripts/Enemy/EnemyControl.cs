@@ -43,7 +43,7 @@ public class EnemyControl : MonoBehaviour
 
     //attack
     public GameObject projectile;
-    //public GameObject rewardPrefab;
+    public GameObject rewardPrefab;
 
     //public float luckypoint=20;
     // Start is called before the first frame update
@@ -233,7 +233,7 @@ public class EnemyControl : MonoBehaviour
     public void Reward()
     {
         //float lucky = UnityEngine.Random.Range(0, 100);
-        //GameObject reward = Instantiate(rewardPrefab, transform.position, Quaternion.identity);
+        GameObject reward = Instantiate(rewardPrefab, transform.position, Quaternion.identity);
 
     }
         private void OnDrawGizmosSelected()
