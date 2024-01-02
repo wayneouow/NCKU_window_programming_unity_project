@@ -13,7 +13,7 @@ public class playerscontrol : MonoBehaviour
     // [SerializeField] float movingSpeed = 10f;
     
     public float health=100f;
-
+    public bool immune = false;
     //heal
     public bool isHealed = false;
     public bool healtimer = false;
@@ -55,7 +55,24 @@ public class playerscontrol : MonoBehaviour
         Vector3 movement = new Vector3(horizontal, 0f, vertical) * movingSpeed * Time.deltaTime;
         transform.Translate(movement, Space.Self);
     }*/
+    public void TakeDagme(float damage)
+    {
+        if(immune==false)
+        {
+            health -= damage;
+        }
+        else
+        {
+            Debug.Log("§K¬Ì¶Ë®`¤¤...");
+            Invoke("ResetImmune",5f);
+        }
+    }
 
+    public void ResetImmune()
+    {
+        immune = false;
+        Debug.Log("µL¼Äµ²§ô");
+    }
     void PlayerHealing(float hp)
     {
         healcount++;

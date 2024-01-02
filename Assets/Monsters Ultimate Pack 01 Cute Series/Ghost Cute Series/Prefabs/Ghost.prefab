@@ -162,6 +162,8 @@ MonoBehaviour:
   slowStartTime: 0
   projectile: {fileID: 245581523800709616, guid: 9442d241d2d8ecc47b49f256b55325c6,
     type: 3}
+  rewardPrefab: {fileID: 3471643304241853864, guid: feb46b78f78e74267836b445901cf537,
+    type: 3}
 --- !u!136 &5328210812715831500
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -43,7 +43,9 @@ public class EnemyControl : MonoBehaviour
 
     //attack
     public GameObject projectile;
+    //public GameObject rewardPrefab;
 
+    //public float luckypoint=20;
     // Start is called before the first frame update
     void Start()
     {
@@ -179,7 +181,7 @@ public class EnemyControl : MonoBehaviour
             rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
             rb.AddForce(transform.up * 8f, ForceMode.Impulse);
             Debug.Log("敵人射出東西");
-            Destroy(rb, 10f);
+            Destroy(rb.gameObject, 4f);
 
         }
     }
@@ -214,7 +216,7 @@ public class EnemyControl : MonoBehaviour
             Debug.Log("敵人死掉");
         }
     }
-    void Die()
+    public void Die()
     {
         // Perform any death-related logic here (e.g., play death animation, drop items, etc.)
         //敵人死掉不要再被子彈打到
@@ -224,29 +226,17 @@ public class EnemyControl : MonoBehaviour
             capsuleCollider.enabled = false;
         }
         // Destroy the enemy GameObject
+        Invoke("Reward", 2f);
         Destroy(gameObject,2f);
     }
-    /*
-    private IEnumerator TakeDamageCoroutine()
+
+    public void Reward()
     {
-        takeDamage = true;
-        yield return new WaitForSeconds(1f);
-        takeDamage = false;
+        //float lucky = UnityEngine.Random.Range(0, 100);
+        //GameObject reward = Instantiate(rewardPrefab, transform.position, Quaternion.identity);
+
     }
-
-    private void DestroyEnemy()
-    {
-        StartCoroutine(DestroyEnemyCoroutine());
-    }
-
-    private IEnumerator DestroyEnemyCoroutine()
-    {
-        //animator.SetBool("Dead", true);
-        yield return new WaitForSeconds(1.8f);
-        Destroy(gameObject);
-    }*/
-
-    private void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);

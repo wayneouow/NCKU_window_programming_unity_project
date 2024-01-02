@@ -179,7 +179,7 @@ public class Enemy3 : MonoBehaviour
             rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
             //rb.AddForce(transform.up * 8f, ForceMode.Impulse);
             Debug.Log("敵人射出東西");
-            Destroy(rb, 4f);
+            Destroy(rb.gameObject, 4f);
 
         }
     }

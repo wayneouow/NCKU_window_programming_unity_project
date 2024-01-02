@@ -16,6 +16,7 @@ public class Attack3 : MonoBehaviour
     {
         
     }
+    
     void OnParticleCollision(GameObject other)
     {
 
@@ -27,8 +28,8 @@ public class Attack3 : MonoBehaviour
             Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
             // 做一些處理
             //scriptBInstance.IsSlow = true;
-            player.health -= damage;
-
+            //player.health -= damage;
+            player.TakeDagme(damage);
             otherRigidbody.AddForce(transform.up * 20f, ForceMode.Impulse);
             //enemy.GetSlow(true);
             Debug.Log("玩家被龍捲風吹起,現在血量" + player.health);

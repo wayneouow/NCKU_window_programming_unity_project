@@ -28504,11 +28504,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2096814601}
-    - target: {fileID: 6001718273727757264, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29541,11 +29536,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2096814601}
-    - target: {fileID: 3093745616161051450, guid: d7aa467cc2d06614c81778313afa4825,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8672787908860700878, guid: d7aa467cc2d06614c81778313afa4825,
         type: 3}
       propertyPath: m_Name
@@ -58683,11 +58673,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2096814601}
-    - target: {fileID: 1704519387888623842, guid: 4cc22bc9bbfb9074782265ec91ae0660,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7610133508913661007, guid: 4cc22bc9bbfb9074782265ec91ae0660,
         type: 3}
       propertyPath: m_Name
@@ -88403,6 +88388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  immune: 0
   isHealed: 0
   healtimer: 0
   healStartTime: 0
@@ -91100,11 +91086,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 801556114}
     m_Modifications:
-    - target: {fileID: 674178313205302446, guid: add7e67fb68b0d54a9d9893bd0356223,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2611149553095877767, guid: add7e67fb68b0d54a9d9893bd0356223,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -91162,15 +91143,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5872057457903416565, guid: add7e67fb68b0d54a9d9893bd0356223,
         type: 3}
+      propertyPath: run
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872057457903416565, guid: add7e67fb68b0d54a9d9893bd0356223,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 2096814601}
-    - target: {fileID: 5872057457903416565, guid: add7e67fb68b0d54a9d9893bd0356223,
-        type: 3}
-      propertyPath: projectile
-      value: 
-      objectReference: {fileID: 6604001239244680799, guid: badf6d1df917aef4f80360cf16f5ef1c,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

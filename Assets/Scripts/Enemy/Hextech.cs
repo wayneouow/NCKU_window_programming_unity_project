@@ -11,6 +11,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
 {
     public List<string> skillList = new List<string>(); // 技能清單
     public List<string> selectedSkills = new List<string>(); // 選擇的技能清單
+    List<int> selectedIndexes = new List<int>();
 
     public bool haschoose = false;
     public int choose = 0;
@@ -18,6 +19,10 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     public Canvas canvas;
 
     public bool isShow=false;
+
+    //skill reset
+    float originwalkSpeed;
+    float originjumpForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +53,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
                 HandleMouseScroll(scroll);
             }
 
+            //按下Enter選擇
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 Debug.Log("你成功選擇海克斯");
@@ -55,6 +61,8 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
                 Debug.Log("玩家選擇了技能：" + selectedSkill);
                 canvas.enabled = false;
                 isShow = false;
+                Debug.Log("這是第"+ selectedIndexes[choose] + "+1招技能");
+                SelectSkill(selectedIndexes[choose]);
             }
 
         }
@@ -64,13 +72,13 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     void InitializeSkillList()
     {
         // 在這裡添加初始技能到技能清單
-        skillList.Add("skill1");
-        skillList.Add("skill2");
-        skillList.Add("skill3");
-        skillList.Add("skill4");
-        skillList.Add("skill5");
-        skillList.Add("skill6");
-        skillList.Add("skill7");
+        skillList.Add("skill1:player full hp");
+        skillList.Add("skill2:speed up");
+        skillList.Add("skill3:Invincible for 5 seconds");
+        skillList.Add("skill4:destroy all enemies");
+        skillList.Add("skill5:jump higher for 5 seconds");
+        skillList.Add("skill6:??");
+        skillList.Add("skill7:??");
         // 添加更多技能...
 
         // 你也可以從其他地方（例如資料庫、檔案等）讀取技能清單
@@ -80,7 +88,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
         // 清空先前的選擇
         selectedSkills.Clear();
         
-        List<int> selectedIndexes = new List<int>();
+        //List<int> selectedIndexes = new List<int>();
         selectedIndexes.Clear();
 
         // 隨機選擇三個技能
@@ -117,7 +125,8 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
 
             if (textComponent != null)
             {
-
+                textComponent.text = "";
+                textComponent.fontSize = 12;
                 textComponent.text += selectedSkills[0];
                 Debug.Log("顯示圖片");
             }
@@ -136,7 +145,8 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
 
             if (textComponent2 != null)
             {
-
+                textComponent2.text = "";
+                textComponent2.fontSize = 12;
                 textComponent2.text += selectedSkills[1];
                 Debug.Log("顯示圖片");
             }
@@ -154,7 +164,8 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
 
             if (canvasObject3 != null)
             {
-
+                textComponent3.text = "";
+                textComponent3.fontSize = 12;
                 textComponent3.text += selectedSkills[2];
                 Debug.Log("顯示圖片");
             }
@@ -169,12 +180,70 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     public void SelectSkill(int index)
     {
         // 玩家選擇了其中一個技能
-        string selectedSkill = selectedSkills[index];
-        Debug.Log("玩家選擇了技能：" + selectedSkill);
+        //string selectedSkill = selectedSkills[index];
+        Debug.Log("玩家選擇了技能：" + skillList[index]);
 
         // 在這裡執行你想要實現的技能效果
+        if (index == 0)
+        {
+            GameObject player = GameObject.Find("Player");
+            player.GetComponent<playerscontrol>().health = 100;
+            Debug.Log("成功使用第" + skillList[index] + "招技能");
+
+        }
+        else if(index == 1)
+        {
+
+            GameObject player = GameObject.Find("Player");
+            originwalkSpeed = player.GetComponent<PlayerMovementAdvanced>().walkSpeed;
+            player.GetComponent<PlayerMovementAdvanced>().walkSpeed = 20;
+            Invoke("ResetWalkSpeed", 5f);
+            Debug.Log("成功使用第" + skillList[index] + "招技能");
+        }
+        else if(index == 2)
+        {
+            GameObject player = GameObject.Find("Player");
+            player.GetComponent<playerscontrol>().immune = true;
+            Debug.Log("成功使用第" + skillList[index] + "招技能");
+        }
+        else if (index == 3)
+        {
+            GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject obj in objectsWithTag)
+            {
+                EnemyControl enemyControl = obj.GetComponent<EnemyControl>();
+                if(enemyControl != null)
+                {
+                    enemyControl.Die();
+                }
+               
+                //Destroy(obj);
+            }
+            Debug.Log("成功使用第" + skillList[index] + "招技能");
+        }
+        else if (index == 4)
+        {
+            GameObject player = GameObject.Find("Player");
+            originjumpForce = player.GetComponent<PlayerMovementAdvanced>().jumpForce;
+            player.GetComponent<PlayerMovementAdvanced>().jumpForce = 50;
+            Invoke("ResetJumpForce", 5f);
+            Debug.Log("成功使用第" + skillList[index] + "招技能");
+        }
+        else if (index == 5)
+        {
+            Debug.Log("成功使用第" + skillList[index] + "招技能");
+        }
+        else if (index == 6)
+        {
+            Debug.Log("成功使用第" + skillList[index] + "招技能");
+        }
+        else if (index == 7)
+        {
+            Debug.Log("成功使用第" + skillList[index] + "招技能");
+        }
 
         // 清空選擇的技能，重新生成新的三個技能
+        choose = 0;
         GenerateRandomSkills();
         DisplaySkills();
     }
@@ -233,5 +302,18 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
             select_image.transform.position = canvasObject3.transform.position;
         }
     }
+    //重製技能的冷卻
+    public void ResetWalkSpeed()
+    {
+        GameObject player = GameObject.Find("Player");
+        player.GetComponent<PlayerMovementAdvanced>().walkSpeed = originwalkSpeed;
+        Debug.Log("恢復走路速度");
+    }
 
+    public void ResetJumpForce()
+    {
+        GameObject player = GameObject.Find("Player");
+        player.GetComponent<PlayerMovementAdvanced>().jumpForce = originjumpForce;
+        Debug.Log("恢復跳躍力");
+    }
 }

@@ -356,7 +356,8 @@ MonoBehaviour:
   isSlowed: 0
   slowtimer: 0
   slowStartTime: 0
-  projectile: {fileID: 100004, guid: 2f882dd0afc5eac4eba7be3ee38a9a72, type: 3}
+  projectile: {fileID: 6604001239244680799, guid: badf6d1df917aef4f80360cf16f5ef1c,
+    type: 3}
 --- !u!1 &2611149553095981225
 GameObject:
   m_ObjectHideFlags: 0

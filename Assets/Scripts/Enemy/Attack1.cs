@@ -19,6 +19,7 @@ public class Attack1 : MonoBehaviour
         
     }
 
+    //受傷(被球丟到 被火燙到)
     void OnParticleCollision(GameObject other)
     {
         
@@ -29,7 +30,8 @@ public class Attack1 : MonoBehaviour
             playerscontrol player = other.GetComponent<playerscontrol>();
             // 做一些處理
             //scriptBInstance.IsSlow = true;
-            player.health -= damage;
+            //player.health -= damage;
+            player.TakeDagme(damage);
             //enemy.GetSlow(true);
             Debug.Log("玩家受傷,現在血量" + player.health);   
         }

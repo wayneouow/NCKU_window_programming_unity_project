@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Ability2Trigger : MonoBehaviour
 {
-    private bool hasCollided = false;
+    //private bool hasCollided = false;
     // Start is called before the first frame update
     void Start()
     {
