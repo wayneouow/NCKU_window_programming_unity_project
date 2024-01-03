@@ -124,7 +124,7 @@ public class CustomBullet : MonoBehaviour
         {
             enemy.TakeDamage(damage);
             //Destroy(gameObject); // 刀击中敌人后销毁刀
-            Debug.Log("敵人受傷被攻擊");
+            //Debug.Log("敵人受傷被攻擊");
         }
 
         Enemy2 enemy2 = other.GetComponent<Enemy2>();
@@ -132,7 +132,7 @@ public class CustomBullet : MonoBehaviour
         {
             enemy2.TakeDamage(damage);
             //Destroy(gameObject); // 刀击中敌人后销毁刀
-            Debug.Log("敵人2受傷被攻擊");
+            //Debug.Log("敵人2受傷被攻擊");
         }
 
         Enemy3 enemy3 = other.GetComponent<Enemy3>();
@@ -140,7 +140,7 @@ public class CustomBullet : MonoBehaviour
         {
             enemy3.TakeDamage(damage);
             //Destroy(gameObject); // 刀击中敌人后销毁刀
-            Debug.Log("敵人3受傷被攻擊");
+            //Debug.Log("敵人3受傷被攻擊");
         }
 
     }

@@ -48,7 +48,7 @@ public class Ability3 : MonoBehaviour
         // click to make real prefab
         if (Input.GetMouseButtonDown(0) && show )
         {
-            Debug.Log("產生治療圈");
+            //Debug.Log("產生治療圈");
             GenerateRealPrefab();
             show = false;
         }

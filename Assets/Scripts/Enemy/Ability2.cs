@@ -49,7 +49,7 @@ public class Ability2 : MonoBehaviour
         // click to make real prefab
         if (Input.GetMouseButtonDown(0) && show2)
         {
-            Debug.Log("產生緩速圈");
+            //Debug.Log("產生緩速圈");
             GenerateRealPrefab();
             show2 = false;
         }

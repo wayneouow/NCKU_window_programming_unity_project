@@ -32,7 +32,7 @@ public class Attack3 : MonoBehaviour
             player.TakeDagme(damage);
             otherRigidbody.AddForce(transform.up * 20f, ForceMode.Impulse);
             //enemy.GetSlow(true);
-            Debug.Log("玩家被龍捲風吹起,現在血量" + player.health);
+            //Debug.Log("玩家被龍捲風吹起,現在血量" + player.health);
         }
 
     }

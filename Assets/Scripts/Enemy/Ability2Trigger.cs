@@ -32,7 +32,7 @@ public class Ability2Trigger : MonoBehaviour
                 enemy.isSlowed = true;
                 enemy.slowtimer =true;
                 //enemy.GetSlow(true);
-                Debug.Log("碰到緩速圈");
+                //Debug.Log("碰到緩速圈");
 
                 // 標記為已經觸發
                 //hasCollided = true;

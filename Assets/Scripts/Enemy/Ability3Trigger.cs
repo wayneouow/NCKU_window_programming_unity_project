@@ -25,7 +25,7 @@ public class Ability3Trigger : MonoBehaviour
             player.isHealed = true;
             player.healtimer = true;
             //enemy.GetSlow(true);
-            Debug.Log("碰到治癒圈");
+            //Debug.Log("碰到治癒圈");
 
             // 標記為已經觸發
             //hasCollided = true;

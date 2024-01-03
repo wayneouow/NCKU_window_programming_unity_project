@@ -60,12 +60,12 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
             //按下Enter選擇
             if (Input.GetMouseButtonDown(1))
             {
-                Debug.Log("你成功選擇海克斯");
+                //Debug.Log("你成功選擇海克斯");
                 string selectedSkill = selectedSkills[choose];
-                Debug.Log("玩家選擇了技能：" + selectedSkill);
+                //Debug.Log("玩家選擇了技能：" + selectedSkill);
                 canvas.enabled = false;
                 isShow = false;
-                Debug.Log("這是第"+ selectedIndexes[choose] + "+1招技能");
+                //Debug.Log("這是第"+ selectedIndexes[choose] + "+1招技能");
                 SelectSkill(selectedIndexes[choose]);
             }
 
@@ -133,11 +133,11 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
                 textComponent.text = "";
                 textComponent.fontSize = 12;
                 textComponent.text += selectedSkills[0];
-                Debug.Log("顯示圖片");
+                //Debug.Log("顯示圖片");
             }
             else
             {
-                Debug.Log("not found on Canvas");
+                //Debug.Log("not found on Canvas");
             }
         }
         GameObject canvasObject2 = GameObject.FindWithTag("hex2");
@@ -153,11 +153,11 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
                 textComponent2.text = "";
                 textComponent2.fontSize = 12;
                 textComponent2.text += selectedSkills[1];
-                Debug.Log("顯示圖片");
+                //Debug.Log("顯示圖片");
             }
             else
             {
-                Debug.Log("not found on Canvas");
+               // Debug.Log("not found on Canvas");
             }
         }
         GameObject canvasObject3 = GameObject.FindWithTag("hex3");
@@ -172,11 +172,11 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
                 textComponent3.text = "";
                 textComponent3.fontSize = 12;
                 textComponent3.text += selectedSkills[2];
-                Debug.Log("顯示圖片");
+                //Debug.Log("顯示圖片");
             }
             else
             {
-                Debug.Log("not found on Canvas");
+                //Debug.Log("not found on Canvas");
             }
         }
 
@@ -186,14 +186,14 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     {
         // 玩家選擇了其中一個技能
         //string selectedSkill = selectedSkills[index];
-        Debug.Log("玩家選擇了技能：" + skillList[index]);
+       // Debug.Log("玩家選擇了技能：" + skillList[index]);
 
         // 在這裡執行你想要實現的技能效果
         if (index == 0)
         {
             GameObject player = GameObject.Find("Player");
             player.GetComponent<playerscontrol>().health = 100;
-            Debug.Log("成功使用第" + skillList[index] + "招技能");
+            //Debug.Log("成功使用第" + skillList[index] + "招技能");
 
         }
         else if(index == 1)
@@ -203,13 +203,13 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
             originwalkSpeed = player.GetComponent<PlayerMovementAdvanced>().walkSpeed;
             player.GetComponent<PlayerMovementAdvanced>().walkSpeed = 20;
             Invoke("ResetWalkSpeed", 5f);
-            Debug.Log("成功使用第" + skillList[index] + "招技能");
+            //Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
         else if(index == 2)
         {
             GameObject player = GameObject.Find("Player");
             player.GetComponent<playerscontrol>().immune = true;
-            Debug.Log("成功使用第" + skillList[index] + "招技能");
+            //Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
         else if (index == 3)
         {
@@ -224,7 +224,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
                
                 //Destroy(obj);
             }
-            Debug.Log("成功使用第" + skillList[index] + "招技能");
+            //Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
         else if (index == 4)
         {
@@ -232,21 +232,21 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
             originjumpForce = player.GetComponent<PlayerMovementAdvanced>().jumpForce;
             player.GetComponent<PlayerMovementAdvanced>().jumpForce = 50;
             Invoke("ResetJumpForce", 5f);
-            Debug.Log("成功使用第" + skillList[index] + "招技能");
+            //Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
         else if (index == 5)
         {
             GameObject player = GameObject.Find("Player");
             float damage = player.GetComponent<playerscontrol>().damage;
             player.GetComponent<playerscontrol>().damage = damage * 1.25f;
-            Debug.Log("成功使用第" + skillList[index] + "招技能");
+            //Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
         else if (index == 6)
         {
             GameObject player = GameObject.Find("Player");
             float armor = player.GetComponent<playerscontrol>().armor;
             player.GetComponent<playerscontrol>().armor = armor * 0.75f;
-            Debug.Log("成功使用第" + skillList[index] + "招技能");
+            //Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
         else if (index == 7)
         {
@@ -255,7 +255,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
             float lucky = player.GetComponent<playerscontrol>().lucky;
             player.GetComponent<playerscontrol>().lucky = lucky * rate;
 
-            Debug.Log("成功使用第" + skillList[index] + "招技能");
+            //Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
 
         // 清空選擇的技能，重新生成新的三個技能
@@ -268,7 +268,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     {
         // 玩家點擊了圖片，觸發選擇技能的功能
         SelectSkill(index);
-        Debug.Log("已經選擇海克斯");
+        //Debug.Log("已經選擇海克斯");
     }
     private void HandleMouseScroll(float scrollValue)
     {
@@ -278,7 +278,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
         GameObject canvasObject3 = GameObject.FindWithTag("hex3");
         if (scrollValue > 0f)
         {
-            Debug.Log("向上滾動");
+            //Debug.Log("向上滾動");
             if (choose < 2)
             {
                 choose += 1;
@@ -288,7 +288,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
         }
         else if (scrollValue < 0f)
         {
-            Debug.Log("向下滾動");
+            //Debug.Log("向下滾動");
             if (choose>0)
             {
                 choose -= 1;
@@ -304,7 +304,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
             // 在這裡執行停止滾動的功能
             // 例如不執行任何特定操作
         }
-        Debug.Log(choose);
+        //Debug.Log(choose);
         if (choose == 0)
         {
             select_image.transform.position=canvasObject.transform.position;
@@ -323,13 +323,13 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     {
         GameObject player = GameObject.Find("Player");
         player.GetComponent<PlayerMovementAdvanced>().walkSpeed = originwalkSpeed;
-        Debug.Log("恢復走路速度");
+        //Debug.Log("恢復走路速度");
     }
 
     public void ResetJumpForce()
     {
         GameObject player = GameObject.Find("Player");
         player.GetComponent<PlayerMovementAdvanced>().jumpForce = originjumpForce;
-        Debug.Log("恢復跳躍力");
+        //Debug.Log("恢復跳躍力");
     }
 }

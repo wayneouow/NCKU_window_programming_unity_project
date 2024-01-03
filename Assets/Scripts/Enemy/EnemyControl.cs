@@ -134,7 +134,7 @@ public class EnemyControl : MonoBehaviour
                 if (slowStartTime >= slowDuration)
                 {
                     // 緩速結束，恢復正常速度
-                    Debug.Log("敵人恢復");
+                    //Debug.Log("敵人恢復");
                     navAgent.isStopped = false;
                     isSlowed = false;
                     slowtimer = false;
@@ -183,7 +183,7 @@ public class EnemyControl : MonoBehaviour
             Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
             rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-            Debug.Log("敵人射出東西");
+            //Debug.Log("敵人射出東西");
             Destroy(rb.gameObject, 4f);
 
         }
@@ -200,9 +200,9 @@ public class EnemyControl : MonoBehaviour
     public void TakeDamage(float damage)
     {
         animator.SetTrigger("EnemyHurt");
-        Debug.Log("敵人受到傷害：" + damage);
+        //Debug.Log("敵人受到傷害：" + damage);
         health -= damage;
-        Debug.Log("敵人當前血量：" + health);
+        //Debug.Log("敵人當前血量：" + health);
         GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
         //hitEffect.Play();
         Destroy(hitEffect, 1f);
@@ -216,7 +216,7 @@ public class EnemyControl : MonoBehaviour
             // Debug.Log(scriptAReference.score);
             Die();
             //Invoke(nameof(DestroyEnemy), 0.5f);
-            Debug.Log("敵人死掉");
+            //Debug.Log("敵人死掉");
         }
     }
     public void Die()
@@ -238,7 +238,7 @@ public class EnemyControl : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         float maxlucky = player.GetComponent<playerscontrol>().lucky;
         float lucky = Random.Range(0f, maxlucky);
-        Debug.Log("隨機幸運"+lucky +"vs 敵人幸運" +luckypoint);
+        //Debug.Log("隨機幸運"+lucky +"vs 敵人幸運" +luckypoint);
         if(lucky <= luckypoint)
         {
             GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);

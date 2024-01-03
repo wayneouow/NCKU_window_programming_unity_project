@@ -24,8 +24,8 @@ public class Treasure : MonoBehaviour
             GameObject canvasObject = GameObject.FindWithTag("rewardtag");
             Canvas canvas = canvasObject.GetComponent<Canvas>();
             canvas.enabled = true;
-            Debug.Log(canvas.gameObject.name);
-            Debug.Log(canvas.enabled);
+            //Debug.Log(canvas.gameObject.name);
+            //Debug.Log(canvas.enabled);
 
         }
     }

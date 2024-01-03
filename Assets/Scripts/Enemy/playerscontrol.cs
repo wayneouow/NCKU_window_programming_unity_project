@@ -68,7 +68,7 @@ public class playerscontrol : MonoBehaviour
         }
         else
         {
-            Debug.Log("免疫傷害中...");
+            //Debug.Log("免疫傷害中...");
             Invoke("ResetImmune",5f);
         }
     }
@@ -76,7 +76,7 @@ public class playerscontrol : MonoBehaviour
     public void ResetImmune()
     {
         immune = false;
-        Debug.Log("無敵結束");
+        //Debug.Log("無敵結束");
     }
     void PlayerHealing(float hp)
     {
@@ -90,7 +90,7 @@ public class playerscontrol : MonoBehaviour
             health += hp;
             //Debug.Log("敵人停止");
 
-            Debug.Log("玩家正在回血，血量=" + health);
+            //Debug.Log("玩家正在回血，血量=" + health);
             if (healStartTime >= healDuration)
             {
                 // 效果結束

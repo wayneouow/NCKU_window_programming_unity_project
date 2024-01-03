@@ -152,7 +152,7 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 1664
-  bounciness: 0
+  bounciness: 1
   useGravity: 1
   explosionDamage: 40
   explosionRange: 3

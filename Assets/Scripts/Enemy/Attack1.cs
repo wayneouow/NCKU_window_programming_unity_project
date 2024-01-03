@@ -33,7 +33,7 @@ public class Attack1 : MonoBehaviour
             //player.health -= damage;
             player.TakeDagme(damage);
             //enemy.GetSlow(true);
-            Debug.Log("玩家受傷,現在血量" + player.health);   
+            //Debug.Log("玩家受傷,現在血量" + player.health);   
         }
         
     }

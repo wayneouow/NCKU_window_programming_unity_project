@@ -20,7 +20,7 @@ public class Hex_choose1 : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData e)
     {
-        Debug.Log("헕을button1");
+        //Debug.Log("헕을button1");
         Hextech hextech = GetComponent<Hextech>();
         hextech.haschoose = true;
     }

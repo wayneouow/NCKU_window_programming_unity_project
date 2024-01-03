@@ -134,7 +134,7 @@ public class Enemy2 : MonoBehaviour
                 if (slowStartTime >= slowDuration)
                 {
                     // 緩速結束，恢復正常速度
-                    Debug.Log("敵人恢復");
+                    //Debug.Log("敵人恢復");
                     navAgent.isStopped = false;
                     isSlowed = false;
                     slowtimer = false;
@@ -190,7 +190,7 @@ public class Enemy2 : MonoBehaviour
 
             //rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
             //rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-            Debug.Log("敵人噴火");
+            //Debug.Log("敵人噴火");
           
             Destroy(fireshoot,5f);
 
@@ -212,9 +212,9 @@ public class Enemy2 : MonoBehaviour
     public void TakeDamage(float damage)
     {
         //animator.SetTrigger("EnemyHurt");
-        Debug.Log("受到傷害：" + hurt_damage);
+        //Debug.Log("受到傷害：" + hurt_damage);
         health -= damage;
-        Debug.Log("當前血量：" + health);
+        //Debug.Log("當前血量：" + health);
         GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
         //hitEffect.Play();
         Destroy(hitEffect, 1f);
@@ -228,7 +228,7 @@ public class Enemy2 : MonoBehaviour
             // Debug.Log(scriptAReference.score);
             Die();
             //Invoke(nameof(DestroyEnemy), 0.5f);
-            Debug.Log("敵人死掉");
+            //Debug.Log("敵人死掉");
         }
     }
     void Die()
