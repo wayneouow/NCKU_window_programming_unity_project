@@ -21,6 +21,7 @@ public class Enemy2 : MonoBehaviour
     public Animator animator;
 
     public GameObject hitEffectPrefab;
+    public GameObject RewardEffectPrefab;
     // public ParticleSystem hitEffect;
     public bool walk = false;
     public bool run = false;
@@ -44,6 +45,10 @@ public class Enemy2 : MonoBehaviour
     //attack
     public GameObject fire;
     public Transform fireSpawnPoint;
+    public GameObject rewardPrefab;
+    //reward
+    public float luckypoint = 0.35f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -236,9 +241,23 @@ public class Enemy2 : MonoBehaviour
             capsuleCollider.enabled = false;
         }
         // Destroy the enemy GameObject
+        Invoke("Reward", 2f);
         Destroy(gameObject, 2f);
     }
-   
+
+    public void Reward()
+    {
+        float lucky = Random.Range(0f, 1f);
+        if (lucky <= luckypoint)
+        {
+            GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);
+            //hitEffect.Play();
+            Destroy(RewardEffect, 1f);
+            //float lucky = UnityEngine.Random.Range(0, 100);
+            GameObject reward = Instantiate(rewardPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

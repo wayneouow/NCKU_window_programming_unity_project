@@ -15,13 +15,14 @@ public class EnemyControl : MonoBehaviour
     public float timeBetweenAttacks;
     public float sightRange;
     public float attackRange;
-    public int damage;
+    public int attackdamage = 5;
     public int hurt_damage;
     //animation
     public Animator animator;
 
     public GameObject hitEffectPrefab;
-   // public ParticleSystem hitEffect;
+    public GameObject RewardEffectPrefab;
+    // public ParticleSystem hitEffect;
     public bool walk = false;
     public bool run = false;
 
@@ -45,6 +46,8 @@ public class EnemyControl : MonoBehaviour
     public GameObject projectile;
     public GameObject rewardPrefab;
 
+    //reward
+    public float luckypoint=0.25f;
     //public float luckypoint=20;
     // Start is called before the first frame update
     void Start()
@@ -197,9 +200,9 @@ public class EnemyControl : MonoBehaviour
     public void TakeDamage(float damage)
     {
         animator.SetTrigger("EnemyHurt");
-        Debug.Log("受到傷害：" + hurt_damage);
+        Debug.Log("敵人受到傷害：" + damage);
         health -= damage;
-        Debug.Log("當前血量：" + health);
+        Debug.Log("敵人當前血量：" + health);
         GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
         //hitEffect.Play();
         Destroy(hitEffect, 1f);
@@ -232,9 +235,18 @@ public class EnemyControl : MonoBehaviour
 
     public void Reward()
     {
-        //float lucky = UnityEngine.Random.Range(0, 100);
-        GameObject reward = Instantiate(rewardPrefab, transform.position, Quaternion.identity);
-
+        GameObject player = GameObject.Find("Player");
+        float maxlucky = player.GetComponent<playerscontrol>().lucky;
+        float lucky = Random.Range(0f, maxlucky);
+        Debug.Log("隨機幸運"+lucky +"vs 敵人幸運" +luckypoint);
+        if(lucky <= luckypoint)
+        {
+            GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);
+            //hitEffect.Play();
+            Destroy(RewardEffect, 1f);
+            //float lucky = UnityEngine.Random.Range(0, 100);
+            GameObject reward = Instantiate(rewardPrefab, transform.position, Quaternion.identity);
+        }
     }
         private void OnDrawGizmosSelected()
     {

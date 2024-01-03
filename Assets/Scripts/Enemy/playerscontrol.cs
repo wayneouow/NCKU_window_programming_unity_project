@@ -20,6 +20,10 @@ public class playerscontrol : MonoBehaviour
     public float healStartTime = 0f;
     private float healDuration = 4f;
     private int healcount = 0;
+    //attack
+    public float damage = 50f;
+    public float armor = 1f;
+    public float lucky = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +61,7 @@ public class playerscontrol : MonoBehaviour
     }*/
     public void TakeDagme(float damage)
     {
+        damage = damage * armor;
         if(immune==false)
         {
             health -= damage;

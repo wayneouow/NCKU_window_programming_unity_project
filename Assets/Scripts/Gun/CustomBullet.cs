@@ -118,9 +118,11 @@ public class CustomBullet : MonoBehaviour
     {
         // 如果碰撞到敌人，调用敌人的 TakeDamage 方法
         EnemyControl enemy = other.GetComponent<EnemyControl>();
+        GameObject player = GameObject.Find("Player");
+        float damage = player.GetComponent<playerscontrol>().damage;
         if (enemy != null)
         {
-            enemy.TakeDamage(50);
+            enemy.TakeDamage(damage);
             //Destroy(gameObject); // 刀击中敌人后销毁刀
             Debug.Log("敵人受傷被攻擊");
         }
@@ -128,9 +130,17 @@ public class CustomBullet : MonoBehaviour
         Enemy2 enemy2 = other.GetComponent<Enemy2>();
         if (enemy2 != null)
         {
-            enemy2.TakeDamage(50);
+            enemy2.TakeDamage(damage);
             //Destroy(gameObject); // 刀击中敌人后销毁刀
             Debug.Log("敵人2受傷被攻擊");
+        }
+
+        Enemy3 enemy3 = other.GetComponent<Enemy3>();
+        if (enemy3 != null)
+        {
+            enemy3.TakeDamage(damage);
+            //Destroy(gameObject); // 刀击中敌人后销毁刀
+            Debug.Log("敵人3受傷被攻擊");
         }
 
     }

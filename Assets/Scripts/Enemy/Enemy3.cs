@@ -21,6 +21,7 @@ public class Enemy3 : MonoBehaviour
     public Animator animator;
 
     public GameObject hitEffectPrefab;
+    public GameObject RewardEffectPrefab;
     // public ParticleSystem hitEffect;
     public bool walk = false;
     public bool run = false;
@@ -43,7 +44,9 @@ public class Enemy3 : MonoBehaviour
 
     //attack
     public GameObject projectile;
-
+    public GameObject rewardPrefab;
+    //reward
+    public float luckypoint = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -195,7 +198,7 @@ public class Enemy3 : MonoBehaviour
     public void TakeDamage(float damage)
     {
         animator.SetTrigger("EnemyHurt");
-        Debug.Log("受到傷害：" + hurt_damage);
+        //Debug.Log("受到傷害：" + hurt_damage);
         health -= damage;
         Debug.Log("當前血量：" + health);
         GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
@@ -224,27 +227,22 @@ public class Enemy3 : MonoBehaviour
             capsuleCollider.enabled = false;
         }
         // Destroy the enemy GameObject
+        Invoke("Reward", 2f);
         Destroy(gameObject, 2f);
     }
-    /*
-    private IEnumerator TakeDamageCoroutine()
-    {
-        takeDamage = true;
-        yield return new WaitForSeconds(1f);
-        takeDamage = false;
-    }
 
-    private void DestroyEnemy()
+    public void Reward()
     {
-        StartCoroutine(DestroyEnemyCoroutine());
+        float lucky = Random.Range(0f, 1f);
+        if (luckypoint <= lucky)
+        {
+            GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);
+            //hitEffect.Play();
+            Destroy(RewardEffect, 1f);
+            //float lucky = UnityEngine.Random.Range(0, 100);
+            GameObject reward = Instantiate(rewardPrefab, transform.position, Quaternion.identity);
+        }
     }
-
-    private IEnumerator DestroyEnemyCoroutine()
-    {
-        //animator.SetBool("Dead", true);
-        yield return new WaitForSeconds(1.8f);
-        Destroy(gameObject);
-    }*/
 
     private void OnDrawGizmosSelected()
     {

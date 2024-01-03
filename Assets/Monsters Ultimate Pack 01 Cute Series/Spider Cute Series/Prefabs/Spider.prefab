@@ -1371,10 +1371,12 @@ MonoBehaviour:
   timeBetweenAttacks: 15
   sightRange: 15
   attackRange: 5
-  damage: 5
+  attackdamage: 5
   hurt_damage: 50
   animator: {fileID: 0}
   hitEffectPrefab: {fileID: 2944396702758532163, guid: e190bf97c041e58448af6b043116cba0,
+    type: 3}
+  RewardEffectPrefab: {fileID: 4938095755617958529, guid: 2e79f16be10fbd14f8d5ef191f8db4aa,
     type: 3}
   walk: 0
   run: 0
@@ -1385,6 +1387,7 @@ MonoBehaviour:
     type: 3}
   rewardPrefab: {fileID: 3027125209394520476, guid: ca2983d991e3232428330ad1c1ee64e8,
     type: 3}
+  luckypoint: 0.25
 --- !u!136 &9005118340726947881
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -340,7 +340,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  health: 100
+  health: 300
   originalSpeed: 15
   walkPointRange: 15
   timeBetweenAttacks: 15
@@ -351,6 +351,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   hitEffectPrefab: {fileID: 2944396702758532163, guid: e190bf97c041e58448af6b043116cba0,
     type: 3}
+  RewardEffectPrefab: {fileID: 0}
   walk: 0
   run: 0
   isSlowed: 0
@@ -358,6 +359,8 @@ MonoBehaviour:
   slowStartTime: 0
   projectile: {fileID: 6604001239244680799, guid: badf6d1df917aef4f80360cf16f5ef1c,
     type: 3}
+  rewardPrefab: {fileID: 0}
+  luckypoint: 0.5
 --- !u!1 &2611149553095981225
 GameObject:
   m_ObjectHideFlags: 0

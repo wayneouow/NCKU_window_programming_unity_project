@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System;
+using UnityEditor.PackageManager;
 
 public class Hextech : MonoBehaviour//, IPointerClickHandler
 {
@@ -57,7 +58,7 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
             }
 
             //按下Enter選擇
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetMouseButtonDown(1))
             {
                 Debug.Log("你成功選擇海克斯");
                 string selectedSkill = selectedSkills[choose];
@@ -78,10 +79,11 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
         skillList.Add("skill1:player full hp");
         skillList.Add("skill2:speed up");
         skillList.Add("skill3:Invincible for 5 seconds");
-        skillList.Add("skill4:destroy all enemies");
+        skillList.Add("skill4:destroy all little enemies");
         skillList.Add("skill5:jump higher for 5 seconds");
-        skillList.Add("skill6:??");
-        skillList.Add("skill7:??");
+        skillList.Add("skill6:+25% attack");
+        skillList.Add("skill7:+25% armor");
+        skillList.Add("skill8:+25% lucky");
         // 添加更多技能...
 
         // 你也可以從其他地方（例如資料庫、檔案等）讀取技能清單
@@ -234,14 +236,25 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
         }
         else if (index == 5)
         {
+            GameObject player = GameObject.Find("Player");
+            float damage = player.GetComponent<playerscontrol>().damage;
+            player.GetComponent<playerscontrol>().damage = damage * 1.25f;
             Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
         else if (index == 6)
         {
+            GameObject player = GameObject.Find("Player");
+            float armor = player.GetComponent<playerscontrol>().armor;
+            player.GetComponent<playerscontrol>().armor = armor * 0.75f;
             Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
         else if (index == 7)
         {
+            float rate = 0.75f;
+            GameObject player = GameObject.Find("Player");
+            float lucky = player.GetComponent<playerscontrol>().lucky;
+            player.GetComponent<playerscontrol>().lucky = lucky * rate;
+
             Debug.Log("成功使用第" + skillList[index] + "招技能");
         }
 
