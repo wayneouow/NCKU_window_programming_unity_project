@@ -32,8 +32,17 @@ public class ProjectileGun : MonoBehaviour
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammunitionDisplay;
 
+    public Animator animator;
+
     //bug fixing 
     public bool allowInvoke = true;
+
+    public CamRecoil camrecoil;
+
+    private void Start()
+    {
+
+    }
 
     private void Awake()
     {
@@ -46,6 +55,7 @@ public class ProjectileGun : MonoBehaviour
     {
         MyInput();
 
+        animator = transform.parent.GetComponent<Animator>();
         //Set ammo display, if it exists :D
         if (ammunitionDisplay != null)
             ammunitionDisplay.SetText(bulletsLeft / bulletsPerTap + " / " + magazineSize / bulletsPerTap);
@@ -66,8 +76,9 @@ public class ProjectileGun : MonoBehaviour
         {
             //Set bullets shot to 0
             bulletsShot = 0;
-
+            animator.SetBool("Fire", true);
             Shoot();
+            
         }
     }
 
@@ -125,17 +136,24 @@ public class ProjectileGun : MonoBehaviour
         //if more than one bulletsPerTap make sure to repeat shoot function
         if (bulletsShot < bulletsPerTap && bulletsLeft > 0)
             Invoke("Shoot", timeBetweenShots);
+        
+        //CamRecoil
+        camrecoil.RecoilFire();
+        
+
     }
     private void ResetShot()
     {
         //Allow shooting and invoking again
         readyToShoot = true;
         allowInvoke = true;
+        animator.SetBool("Fire", false);
     }
 
     private void Reload()
     {
         reloading = true;
+        animator.SetBool("Reloading", true);
         Invoke("ReloadFinished", reloadTime); //Invoke ReloadFinished function with your reloadTime as delay
     }
     private void ReloadFinished()
@@ -143,5 +161,6 @@ public class ProjectileGun : MonoBehaviour
         //Fill magazine
         bulletsLeft = magazineSize;
         reloading = false;
+        animator.SetBool("Reloading", false);
     }
 }

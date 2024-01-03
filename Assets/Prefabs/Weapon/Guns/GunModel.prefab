@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6300995466454737255}
   - component: {fileID: 6368437494440685202}
   - component: {fileID: 4345513978721778055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,9 +134,10 @@ MonoBehaviour:
   fpsCam: {fileID: 0}
   pickKey: 102
   dropKey: 113
-  pickUpRange: 4
+  pickUpRange: 2
   dropForwardForce: 6
   dropUpwardForce: 4
+  ws: {fileID: 0}
   equipped: 1
 --- !u!1 &9071745351623290757
 GameObject:
@@ -147,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 441874625896428387}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackPint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,8 +183,24 @@ PrefabInstance:
       value: AK74
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: ce513237f09a3fc43aaa2101b33c7b21, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ce513237f09a3fc43aaa2101b33c7b21, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: ce513237f09a3fc43aaa2101b33c7b21, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: ce513237f09a3fc43aaa2101b33c7b21, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: ce513237f09a3fc43aaa2101b33c7b21, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ce513237f09a3fc43aaa2101b33c7b21, type: 3}
       propertyPath: m_LocalScale.x

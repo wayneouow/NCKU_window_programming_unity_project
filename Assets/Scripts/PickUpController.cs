@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PickUpController : MonoBehaviour
 {
@@ -12,10 +14,10 @@ public class PickUpController : MonoBehaviour
     public KeyCode dropKey = KeyCode.Q;
     public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
-
+    public WeaponSwitching ws;
     public bool equipped;
     public static bool slotFull;
-
+    
     private void Start()
     {
         //Setup
@@ -39,7 +41,7 @@ public class PickUpController : MonoBehaviour
     {
         //Check if player is in range and "E" is pressed
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(pickKey) && !slotFull) PickUp();
+        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(pickKey) ) PickUp();//&& !slotFull
 
         //Drop if equipped and "Q" is pressed
         if (equipped && Input.GetKeyDown(dropKey)) Drop();
@@ -49,9 +51,19 @@ public class PickUpController : MonoBehaviour
     {
         equipped = true;
         slotFull = true;
+        gameObject.layer = LayerMask.NameToLayer("whatIsHolding");
+        var children = gameObject.GetComponentsInChildren<Transform>(includeInactive: true);
+        foreach (var child in children)
+        {
+            //            Debug.Log(child.name);
+            child.gameObject.layer = LayerMask.NameToLayer("whatIsHolding");
+        }
 
         //Make weapon a child of the camera and move it to default position
+        foreach (Transform weapon in gunContainer.transform)
+            weapon.gameObject.SetActive(false);
         transform.SetParent(gunContainer);
+        ws.selectedWeapon = gunContainer.transform.childCount- 1;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         transform.localScale = Vector3.one;
@@ -68,6 +80,13 @@ public class PickUpController : MonoBehaviour
     {
         equipped = false;
         slotFull = false;
+        gameObject.layer = LayerMask.NameToLayer("whatIsWeapon");
+        var children = gameObject.GetComponentsInChildren<Transform>(includeInactive: true);
+        foreach (var child in children)
+        {
+            //            Debug.Log(child.name);
+            child.gameObject.layer = LayerMask.NameToLayer("whatIsWeapon");
+        }
 
         //Set parent to null
         transform.SetParent(null);
@@ -83,7 +102,7 @@ public class PickUpController : MonoBehaviour
         rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
         rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
         //Add random rotation
-        float random = Random.Range(-1f, 1f);
+        float random = UnityEngine.Random.Range(-1f, 1f);
         rb.AddTorque(new Vector3(random, random, random) * 10);
 
         //Disable script
