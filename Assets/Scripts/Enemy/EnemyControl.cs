@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.ProBuilder;
 
 public class EnemyControl : MonoBehaviour
 {
@@ -14,14 +15,25 @@ public class EnemyControl : MonoBehaviour
     public float timeBetweenAttacks;
     public float sightRange;
     public float attackRange;
-    public int damage;
+    public int attackdamage = 5;
+    public int hurt_damage;
+    //animation
     public Animator animator;
-    public ParticleSystem hitEffect;
+
+    public GameObject hitEffectPrefab;
+    public GameObject RewardEffectPrefab;
+    // public ParticleSystem hitEffect;
+    public bool walk = false;
+    public bool run = false;
+
 
     private Vector3 walkPoint;
     private bool walkPointSet;
     private bool alreadyAttacked;
     private bool takeDamage;
+
+    //wave
+    //public SpawnEnemy scriptAReference;
 
     // Effect by ability
     // 2:
@@ -29,11 +41,19 @@ public class EnemyControl : MonoBehaviour
     public bool slowtimer = false;
     public float slowStartTime = 0f;
     private float slowDuration = 4f;
+
+    //attack
+    public GameObject projectile;
+    public GameObject rewardPrefab;
+
+    //reward
+    public float luckypoint=0.25f;
+    //public float luckypoint=20;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        player = GameObject.Find("TempPlayer").transform;
+        player = GameObject.Find("Player").transform;
         navAgent = GetComponent<NavMeshAgent>();
         originalSpeed = navAgent.acceleration;
     }
@@ -46,10 +66,14 @@ public class EnemyControl : MonoBehaviour
 
         if (!playerInSightRange && !playerInAttackRange)
         {
+            walk = true;
+            run = false;
             Patroling();
         }
         else if (playerInSightRange && !playerInAttackRange)
         {
+            walk = false;
+            run = true;
             ChasePlayer();
         }
         else if (playerInAttackRange && playerInSightRange)
@@ -58,6 +82,8 @@ public class EnemyControl : MonoBehaviour
         }
         else if (!playerInSightRange && takeDamage)
         {
+            walk = false;
+            run = true;
             ChasePlayer();
         }
     }
@@ -75,7 +101,7 @@ public class EnemyControl : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         //animator.SetFloat("Velocity", 0.2f);
-
+        
         if (distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
@@ -98,17 +124,12 @@ public class EnemyControl : MonoBehaviour
     {
         if (isSlowed)
         {
-            //³Q½w³t
             if(slowtimer)
             {
                 slowStartTime += Time.deltaTime;
-                // Ä~Äò½w³t¤¤
-                //Debug.Log("¼Ä¤H°±¤î");
                 navAgent.isStopped = true;
                 if (slowStartTime >= slowDuration)
                 {
-                    // ½w³tµ²§ô¡A«ì´_¥¿±`³t«×
-                    Debug.Log("¼Ä¤H«ì´_");
                     navAgent.isStopped = false;
                     isSlowed = false;
                     slowtimer = false;
@@ -121,6 +142,7 @@ public class EnemyControl : MonoBehaviour
         else
         {
             navAgent.SetDestination(player.position);
+            animator.SetBool("Run", run);
             //animator.SetFloat("Velocity", 0.6f);
             navAgent.isStopped = false; // Add this line     
         }
@@ -136,7 +158,7 @@ public class EnemyControl : MonoBehaviour
         {
             transform.LookAt(player.position);
             alreadyAttacked = true;
-            //animator.SetBool("Attack", true);
+            animator.SetTrigger("Attack");
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
 
             RaycastHit hit;
@@ -151,8 +173,16 @@ public class EnemyControl : MonoBehaviour
                    playerHUD.takeDamage(damage);
                 }
                  */
-                Debug.Log("ª±®a¨ü¶Ë");
             }
+            if(projectile != null)
+            {
+                Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
+                rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+                Destroy(rb.gameObject, 4f);
+            }
+            
+
         }
     }
 
@@ -160,41 +190,62 @@ public class EnemyControl : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+        animator.SetTrigger("Attack");
         //animator.SetBool("Attack", false);
     }
 
     public void TakeDamage(float damage)
     {
+        animator.SetTrigger("EnemyHurt");
         health -= damage;
-        hitEffect.Play();
-        StartCoroutine(TakeDamageCoroutine());
+        GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+        //hitEffect.Play();
+        Destroy(hitEffect, 1f);
+        //StartCoroutine(TakeDamageCoroutine());
 
         if (health <= 0)
         {
-            Invoke(nameof(DestroyEnemy), 0.5f);
+
+            animator.SetTrigger("Die");
+            //scriptAReference.score += 1;           
+            // Debug.Log(scriptAReference.score);
+            Die();
+            //Invoke(nameof(DestroyEnemy), 0.5f);
         }
     }
-
-    private IEnumerator TakeDamageCoroutine()
+    public void Die()
     {
-        takeDamage = true;
-        yield return new WaitForSeconds(2f);
-        takeDamage = false;
+        // Perform any death-related logic here (e.g., play death animation, drop items, etc.)
+        //ï¿½Ä¤Hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½Aï¿½Qï¿½lï¿½uï¿½ï¿½ï¿½ï¿½
+        CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
+        if (capsuleCollider != null)
+        {
+            capsuleCollider.enabled = false;
+        }
+        // Destroy the enemy GameObject
+        Invoke("Reward", 2f);
+        Destroy(gameObject,2f);
     }
 
-    private void DestroyEnemy()
+    public void Reward()
     {
-        StartCoroutine(DestroyEnemyCoroutine());
+        GameObject player = GameObject.Find("Player");
+        float maxlucky = player.GetComponent<playerscontrol>().lucky;
+        float lucky = Random.Range(0f, maxlucky);
+        if(lucky <= luckypoint)
+        {
+            GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);
+            //hitEffect.Play();
+            Destroy(RewardEffect, 1f);
+            //float lucky = UnityEngine.Random.Range(0, 100);
+            if(rewardPrefab != null)
+            {
+                GameObject reward = Instantiate(rewardPrefab, transform.position, Quaternion.identity);
+            }
+                
+        }
     }
-
-    private IEnumerator DestroyEnemyCoroutine()
-    {
-        //animator.SetBool("Dead", true);
-        yield return new WaitForSeconds(1.8f);
-        Destroy(gameObject);
-    }
-
-    private void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);

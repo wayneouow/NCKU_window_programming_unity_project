@@ -11,7 +11,7 @@ public class WeaponSwitching : MonoBehaviour
     void Update()
     {
         int previousSelected = selectedWeapon;
-        int slot = gameObject.GetComponent<Equipping>().Slots.Length; //transform.childCount + 1;
+        int slot = gameObject.transform.childCount + 1; //GetComponent<Equipping>().Slots.Length; //transform.childCount + 1;
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
             if (selectedWeapon >= slot - 1)
