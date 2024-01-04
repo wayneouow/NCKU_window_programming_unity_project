@@ -26744,7 +26744,7 @@ MonoBehaviour:
   enemy3Prefab: {fileID: 1704994100}
   enemy4Prefab: {fileID: 1704994100}
   numberOfEnemiesToSpawn: 5
-  spawnInterval: 20
+  spawnInterval: 5
   spawnRadius: 10
   wave: 0
   score: 0
