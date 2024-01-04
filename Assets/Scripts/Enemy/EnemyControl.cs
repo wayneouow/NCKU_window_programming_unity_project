@@ -6,7 +6,7 @@ using UnityEngine.ProBuilder;
 
 public class EnemyControl : MonoBehaviour
 {
-    public NavMeshAgent navAgent;
+    //public NavMeshAgent navAgent;
     public Transform player;
     public LayerMask groundLayer, playerLayer;
     public float health;
@@ -17,6 +17,10 @@ public class EnemyControl : MonoBehaviour
     public float attackRange;
     public int attackdamage = 5;
     public int hurt_damage;
+    
+    [SerializeField] bool playerInSightRange;
+    [SerializeField] bool playerInAttackRange;
+
     //animation
     public Animator animator;
 
@@ -50,42 +54,52 @@ public class EnemyControl : MonoBehaviour
     public float luckypoint=0.25f;
     //public float luckypoint=20;
     // Start is called before the first frame update
+
+
+    public LayerMask Ground;
+    [SerializeField] bool grounded;
+    [SerializeField] float speed = 10;
+    [SerializeField] float velLimit = 2;
+    [SerializeField] float multiplier = 10;
+    Rigidbody rb;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.Find("Player").transform;
-        navAgent = GetComponent<NavMeshAgent>();
-        originalSpeed = navAgent.acceleration;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool playerInSightRange = Physics.CheckSphere(transform.position, sightRange, playerLayer);
-        bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, playerLayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
 
-        if (!playerInSightRange && !playerInAttackRange)
+        //if (!playerInSightRange && !playerInAttackRange)
+        //{
+        //    walk = true;
+        //    run = false;
+        //    Patroling();
+        //}
+        if (playerInSightRange && !playerInAttackRange)
         {
-            walk = true;
-            run = false;
-            Patroling();
-        }
-        else if (playerInSightRange && !playerInAttackRange)
-        {
+            Debug.Log("chase");
             walk = false;
             run = true;
             ChasePlayer();
         }
-        else if (playerInAttackRange && playerInSightRange)
+        else if (playerInAttackRange && playerInSightRange )
         {
+            Debug.Log("atk");
             AttackPlayer();
         }
-        else if (!playerInSightRange && takeDamage)
-        {
-            walk = false;
-            run = true;
-            ChasePlayer();
-        }
+        //else if (!playerInSightRange && takeDamage)
+        //{
+        //    walk = false;
+        //    run = true;
+        //    ChasePlayer();
+        //}
     }
     private void Patroling()
     {
@@ -96,7 +110,10 @@ public class EnemyControl : MonoBehaviour
 
         if (walkPointSet)
         {
-            navAgent.SetDestination(walkPoint);
+            transform.LookAt(player.transform);
+            Vector3 vel = rb.velocity;
+            grounded = Physics.Raycast(transform.position, Vector3.down, 1f, Ground);
+            GetComponent<Rigidbody>().AddForce(speed * multiplier * Time.deltaTime * transform.forward);
         }
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
@@ -122,29 +139,40 @@ public class EnemyControl : MonoBehaviour
 
     private void ChasePlayer()
     {
+        transform.LookAt(player.position);
+        Vector3 vel = rb.velocity;
+        //if (vel.x > -velLimit && vel.x < velLimit && vel.z > -velLimit && vel.z < velLimit)
+        //{
+        //    //grounded = Physics.Raycast(transform.position, Vector3.down, 1f, Ground);
+
+        //}
+        GetComponent<Rigidbody>().AddForce(speed * multiplier * Time.deltaTime * transform.forward);
         if (isSlowed)
         {
             if(slowtimer)
             {
-                slowStartTime += Time.deltaTime;
-                navAgent.isStopped = true;
-                if (slowStartTime >= slowDuration)
-                {
-                    navAgent.isStopped = false;
-                    isSlowed = false;
-                    slowtimer = false;
-                    slowStartTime = 0f;
-                    slowDuration = 4f;
-                }
+                //slowStartTime += Time.deltaTime;
+                //navAgent.isStopped = true;
+                //if (slowStartTime >= slowDuration)
+                //{
+                //    navAgent.isStopped = false;
+                //    isSlowed = false;
+                //    slowtimer = false;
+                //    slowStartTime = 0f;
+                //    slowDuration = 4f;
+                //}
             }
 
         }
         else
         {
-            navAgent.SetDestination(player.position);
-            animator.SetBool("Run", run);
+            
+            //navAgent.SetDestination(player.position);
+
+            //animator.SetBool("Run", run);
+
             //animator.SetFloat("Velocity", 0.6f);
-            navAgent.isStopped = false; // Add this line     
+            //navAgent.isStopped = false; // Add this line     
         }
 
     }
@@ -152,11 +180,11 @@ public class EnemyControl : MonoBehaviour
 
     private void AttackPlayer()
     {
-        navAgent.SetDestination(transform.position);
+        //navAgent.SetDestination(transform.position);
 
         if (!alreadyAttacked)
         {
-            transform.LookAt(player.position);
+            //transform.LookAt(player.position);
             alreadyAttacked = true;
             animator.SetTrigger("Attack");
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -196,13 +224,14 @@ public class EnemyControl : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log(gameObject + "enemy hurt");
         animator.SetTrigger("EnemyHurt");
         health -= damage;
         GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
         //hitEffect.Play();
         Destroy(hitEffect, 1f);
         //StartCoroutine(TakeDamageCoroutine());
-
+        //navAgent.enabled = true;
         if (health <= 0)
         {
 
@@ -216,15 +245,14 @@ public class EnemyControl : MonoBehaviour
     public void Die()
     {
         // Perform any death-related logic here (e.g., play death animation, drop items, etc.)
-        //�ĤH�������n�A�Q�l�u����
-        CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
-        if (capsuleCollider != null)
-        {
-            capsuleCollider.enabled = false;
-        }
+        //CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
+        //if (capsuleCollider != null)
+        //{
+        //    capsuleCollider.enabled = false;
+        //}
         // Destroy the enemy GameObject
-        Invoke("Reward", 2f);
-        Destroy(gameObject,2f);
+        //Invoke("Reward", 2f);
+        Destroy(gameObject,0.5f);
     }
 
     public void Reward()

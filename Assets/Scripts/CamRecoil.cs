@@ -32,8 +32,6 @@ public class CamRecoil : MonoBehaviour
 
     public void RecoilFire()
     {
-        Debug.Log("fire");
-
         targetRotaion += new Vector3(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
     }
 }

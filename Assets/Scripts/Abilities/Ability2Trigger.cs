@@ -7,6 +7,7 @@ public class Ability2Trigger : MonoBehaviour
 {
     //private bool hasCollided = false;
     // Start is called before the first frame update
+    bool isInRange; 
     void Start()
     {
         
@@ -19,14 +20,15 @@ public class Ability2Trigger : MonoBehaviour
     }
     void OnParticleCollision(GameObject other)
     {
-        //if (!hasCollided)
-        //{
-            if (other.gameObject.CompareTag("Enemy"))
-            {
-                EnemyControl enemy = other.GetComponent<EnemyControl>();
-                enemy.isSlowed = true;
-                enemy.slowtimer =true;
-            }
-       // }
+        Debug.Log("SLOW");
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            EnemySystem enemy = other.GetComponent<EnemySystem>();
+            enemy.enfreeze();
+        }
+
+
     }
+
+    
 }

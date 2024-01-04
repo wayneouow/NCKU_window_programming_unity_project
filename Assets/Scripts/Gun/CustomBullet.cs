@@ -13,7 +13,7 @@ public class CustomBullet : MonoBehaviour
     public bool useGravity;
 
     //Damage
-    public int explosionDamage;
+    public float explosionDamage;
     public float explosionRange;
     public float explosionForce;
 
@@ -49,18 +49,21 @@ public class CustomBullet : MonoBehaviour
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
         for (int i = 0; i < enemies.Length; i++)
         {
-            //Get component of enemy and call Take Damage
 
-            //ENEMY DAMAGE
-            ///enemies[i].GetComponent<ShootingAi>().TakeDamage(explosionDamage);
-
+            Debug.Log(enemies[i].gameObject.name);
+            enemies[i].GetComponent<EnemySystem>().TakeDamage(explosionDamage);
             //Add explosion force (if enemy has a rigidbody)
             if (enemies[i].GetComponent<Rigidbody>())
+            {
                 enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
+                Debug.Log("explode hit" + enemies[i]);
+            }
+
         }
 
         //Add a little delay, just to make sure everything works fine
-        Invoke("Delay", 0.05f);
+        //Invoke("Delay", 0.05f);
+        Destroy(gameObject);
     }
     private void Delay()
     {
@@ -100,4 +103,39 @@ public class CustomBullet : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRange);
     }
+    
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    // 如果碰撞到敌人，调用敌人的 TakeDamage 方法
+    //    EnemyControl enemy = other.GetComponent<EnemyControl>();
+    //    GameObject player = GameObject.Find("Player");
+    //    float damage = player.GetComponent<playerscontrol>().damage;
+    //    if (enemy != null)
+    //    {
+    //        enemy.navAgent.enabled = false;
+    //        enemy.TakeDamage(damage);
+           
+    //        //Destroy(gameObject); // 刀击中敌人后销毁刀
+    //        //Debug.Log("敵人受傷被攻擊");
+    //    }
+    //    /*
+    //    Enemy2 enemy2 = other.GetComponent<Enemy2>();
+    //    if (enemy2 != null)
+    //    {
+    //        enemy2.TakeDamage(damage);
+    //        //Destroy(gameObject); // 刀击中敌人后销毁刀
+    //        //Debug.Log("敵人2受傷被攻擊");
+    //    }
+
+    //    Enemy3 enemy3 = other.GetComponent<Enemy3>();
+    //    if (enemy3 != null)
+    //    {
+    //        enemy3.TakeDamage(damage);
+    //        //Destroy(gameObject); // 刀击中敌人后销毁刀
+    //        //Debug.Log("敵人3受傷被攻擊");
+    //    }
+    //    */
+    //}
+
+  
 }

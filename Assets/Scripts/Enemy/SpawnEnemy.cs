@@ -70,8 +70,9 @@ public class SpawnEnemy : MonoBehaviour
         //randomPosition += PlayerManager.instance.player.transform.position;
         GameObject player = GameObject.FindWithTag("Player");
         randomPosition += player.transform.position;
-        randomPosition.y = 0f;
-        Instantiate(enemy1Prefab, randomPosition, Quaternion.identity);
+        randomPosition.y = 1f;
+        GameObject newEn1 = Instantiate(enemy1Prefab, randomPosition, Quaternion.identity);
+        newEn1.gameObject.SetActive(true);
     }
     void Spawn_Enemy2()
     {
@@ -79,9 +80,10 @@ public class SpawnEnemy : MonoBehaviour
         //randomPosition += PlayerManager.instance.player.transform.position;
         GameObject player = GameObject.FindWithTag("Player");
         randomPosition += player.transform.position;
-        randomPosition.y = 0f;
+        randomPosition.y = 1f;
 
-        Instantiate(enemy2Prefab, randomPosition, Quaternion.identity);
+        GameObject newEn2 = Instantiate(enemy1Prefab, randomPosition, Quaternion.identity);
+        newEn2.gameObject.SetActive(true);
     }
     void Spawn_Enemy3()
     {
@@ -89,9 +91,10 @@ public class SpawnEnemy : MonoBehaviour
         //randomPosition += PlayerManager.instance.player.transform.position;
         GameObject player = GameObject.FindWithTag("Player");
         randomPosition += player.transform.position;
-        randomPosition.y = 0f;
+        randomPosition.y = 1f;
 
-        Instantiate(enemy3Prefab, randomPosition, Quaternion.identity);
+        GameObject newEn3 = Instantiate(enemy1Prefab, randomPosition, Quaternion.identity);
+        newEn3.gameObject.SetActive(true);
     }
     void Spawn_Enemy4()
     {
@@ -99,9 +102,10 @@ public class SpawnEnemy : MonoBehaviour
         //randomPosition += PlayerManager.instance.player.transform.position;
         GameObject player = GameObject.FindWithTag("Player");
         randomPosition += player.transform.position;
-        randomPosition.y = 0f;
+        randomPosition.y = 1f;
 
-        Instantiate(enemy4Prefab, randomPosition, Quaternion.identity);
+        GameObject newEn4 = Instantiate(enemy1Prefab, randomPosition, Quaternion.identity);
+        newEn4.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

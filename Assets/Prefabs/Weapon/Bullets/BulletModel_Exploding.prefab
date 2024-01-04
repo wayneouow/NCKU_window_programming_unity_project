@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 8882250204616983324}
   - component: {fileID: 1165490155807771508}
   - component: {fileID: 3435128838079751265}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: BulletModel_Exploding
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   explosion: {fileID: 100006, guid: 8a4aceaf2957c044480166b429f4c7d0, type: 3}
   whatIsEnemies:
     serializedVersion: 2
-    m_Bits: 1600
+    m_Bits: 8704
   bounciness: 0
   useGravity: 1
   explosionDamage: 20

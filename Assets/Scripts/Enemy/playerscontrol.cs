@@ -79,7 +79,7 @@ public class playerscontrol : MonoBehaviour
     void PlayerHealing(float hp)
     {
         healcount++;
-       
+        Debug.Log("healing");
         isHealed = false;
         if (healtimer)
         {

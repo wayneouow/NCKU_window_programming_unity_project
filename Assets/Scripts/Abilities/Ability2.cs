@@ -14,6 +14,9 @@ public class Ability2 : MonoBehaviour
 
     public bool show2 = false;
     public bool cancle2 = false;
+
+    public KeyCode abKey_2 = KeyCode.Alpha2;
+    public KeyCode abKey_2_esc = KeyCode.Escape;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +34,12 @@ public class Ability2 : MonoBehaviour
     void Update()
     {
         // update preview position
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(abKey_2))
         {
             show2 = true;
             cancle2 = false;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(abKey_2_esc))
         {
             show2 = false;
             cancle2 = true;
@@ -47,7 +50,7 @@ public class Ability2 : MonoBehaviour
             UpdateFakePreviewPosition();
         }
         // click to make real prefab
-        if (Input.GetMouseButtonDown(0) && show2)
+        if (Input.GetMouseButtonDown(2) && show2)
         {
             GenerateRealPrefab();
             show2 = false;
