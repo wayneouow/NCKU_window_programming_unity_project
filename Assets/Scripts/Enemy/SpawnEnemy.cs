@@ -82,7 +82,7 @@ public class SpawnEnemy : MonoBehaviour
         randomPosition += player.transform.position;
         randomPosition.y = 1f;
 
-        GameObject newEn2 = Instantiate(enemy1Prefab, randomPosition, Quaternion.identity);
+        GameObject newEn2 = Instantiate(enemy2Prefab, randomPosition, Quaternion.identity);
         newEn2.gameObject.SetActive(true);
     }
     void Spawn_Enemy3()
@@ -93,7 +93,7 @@ public class SpawnEnemy : MonoBehaviour
         randomPosition += player.transform.position;
         randomPosition.y = 1f;
 
-        GameObject newEn3 = Instantiate(enemy1Prefab, randomPosition, Quaternion.identity);
+        GameObject newEn3 = Instantiate(enemy3Prefab, randomPosition, Quaternion.identity);
         newEn3.gameObject.SetActive(true);
     }
     void Spawn_Enemy4()
@@ -104,7 +104,7 @@ public class SpawnEnemy : MonoBehaviour
         randomPosition += player.transform.position;
         randomPosition.y = 1f;
 
-        GameObject newEn4 = Instantiate(enemy1Prefab, randomPosition, Quaternion.identity);
+        GameObject newEn4 = Instantiate(enemy4Prefab, randomPosition, Quaternion.identity);
         newEn4.gameObject.SetActive(true);
     }
 

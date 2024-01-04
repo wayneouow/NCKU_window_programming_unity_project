@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.ProBuilder;
 
-public class Enemy3 : MonoBehaviour
+public class TornatoEnemy : MonoBehaviour
 {
     public bool found = false;
     public bool lookat = false;
@@ -47,10 +45,6 @@ public class Enemy3 : MonoBehaviour
 
     Rigidbody rb;
     Animator animator;
-    
-    public GameObject projectile;
-    public GameObject rewardPrefab;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -133,28 +127,12 @@ public class Enemy3 : MonoBehaviour
     private void Attack()
     {
         animator.SetTrigger("Attack");
-        if (GetComponent<AudioSource>() != null) 
-        { 
+        if (GetComponent<AudioSource>() != null)
             GetComponent<AudioSource>()?.Play();
-        }
-           
-        //Rigidbody torana = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-        //torana.AddForce(transform.forward * 5f, ForceMode.Impulse);
-        //torana.AddForce(transform.up * 8f, ForceMode.Impulse);
-        //Destroy(rb.gameObject, 4f); 
-        /*
         if (atkParticle != null)
         {
-
-            //Instantiate(atkParticle, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
-            GameObject fireshoot = Instantiate(fire, fireSpawnPoint.position, Quaternion.Euler(0f, -90f, 0f));
-            fireshoot.transform.SetParent(transform);
-            //Rigidbody rb = Instantiate(fire, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-
-            //rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
-            //rb.AddForce(transform.up * 8f, ForceMode.Impulse);          
-            Destroy(fireshoot, 5f);
-        }*/
+            Instantiate(atkParticle, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+        }
         //player.GetComponent<PlayerValue>().HP -= atk;
     }
     private void AttackReset()
@@ -164,7 +142,7 @@ public class Enemy3 : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log(gameObject + "enemy2 hurt" + HP.ToString());
+        Debug.Log(gameObject + "enemy hurt" + HP.ToString());
         animator.SetTrigger("EnemyHurt");
         HP -= damage;
         if (hitEffectPrefab != null)
@@ -207,9 +185,3 @@ public class Enemy3 : MonoBehaviour
     }
 }
 
-/*  public GameObject projectile;
-    public GameObject rewardPrefab;  
-  Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
-            //rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-            Destroy(rb.gameObject, 4f);*/
