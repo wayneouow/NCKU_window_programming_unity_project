@@ -6,243 +6,182 @@ using UnityEngine.ProBuilder;
 
 public class Enemy2 : MonoBehaviour
 {
-    public NavMeshAgent navAgent;
-    public Transform player;
-    public LayerMask groundLayer, playerLayer;
-    public float health;
-    public float originalSpeed;
-    public float walkPointRange;
-    public float timeBetweenAttacks;
+    public bool found = false;
+    public bool lookat = false;
+    public bool near = false;
+
+    public GameObject player;
+    public LayerMask playerLayer;
+    public bool isMoving;
+    public float speed = 10;
+
+    public static float slowRate = 1;
+
+    [SerializeField] float velLimit = 2;
+    [SerializeField] float multiplier = 10;
+    public LayerMask Ground;
+    [SerializeField] bool grounded;
+    [SerializeField] float jumpForce = 1;
+
     public float sightRange;
     public float attackRange;
-    public int damage;
-    public int hurt_damage;
-    //animation
-    public Animator animator;
 
     public GameObject hitEffectPrefab;
-    public GameObject RewardEffectPrefab;
-    // public ParticleSystem hitEffect;
-    public bool walk = false;
-    public bool run = false;
 
+    [Header("Health")]
+    public float MaxHP = 100;
+    public float HP = 100;
+    public bool alive = true;
+    public GameObject Drop;
+    public GameObject DropEffect;
+    bool dropped = false;
+    [Header("Attack")]
+    public bool canAttack = true;
+    public float AttackCoolDown = 0.7f;
+    public bool isAttacking = false;
+    public float atk = 10;
+    public GameObject atkParticle;
 
-    private Vector3 walkPoint;
-    private bool walkPointSet;
-    private bool alreadyAttacked;
-    private bool takeDamage;
+    [Header("Sound")]
+    public AudioClip slimeSound;
 
-    //wave
-    //public SpawnEnemy scriptAReference;
-
-    // Effect by ability
-    // 2:
-    public bool isSlowed = false;
-    public bool slowtimer = false;
-    public float slowStartTime = 0f;
-    private float slowDuration = 4f;
-
-    //attack
+    Rigidbody rb;
+    Animator animator;
     public GameObject fire;
     public Transform fireSpawnPoint;
     public GameObject rewardPrefab;
-    //reward
-    public float luckypoint = 0.35f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        player = GameObject.Find("Player").transform;
-        navAgent = GetComponent<NavMeshAgent>();
-        originalSpeed = navAgent.acceleration;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        bool playerInSightRange = Physics.CheckSphere(transform.position, sightRange, playerLayer);
-        bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
-
-        if (!playerInSightRange && !playerInAttackRange)
+        animatorSet();
+        if (alive)
         {
-            walk = true;
-            run = false;
-            Patroling();
-        }
-        else if (playerInSightRange && !playerInAttackRange)
-        {
-            walk = false;
-            run = true;
-            ChasePlayer();
-        }
-        else if (playerInAttackRange && playerInSightRange)
-        {
-            AttackPlayer();
-        }
-        else if (!playerInSightRange && takeDamage)
-        {
-            walk = false;
-            run = true;
-            ChasePlayer();
-        }
-    }
-    private void Patroling()
-    {
-        if (!walkPointSet)
-        {
-            SearchWalkPoint();
-        }
-
-        if (walkPointSet)
-        {
-            navAgent.SetDestination(walkPoint);
-        }
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        //animator.SetFloat("Velocity", 0.2f);
-
-        if (distanceToWalkPoint.magnitude < 1f)
-        {
-            walkPointSet = false;
-        }
-    }
-
-    private void SearchWalkPoint()
-    {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, groundLayer))
-        {
-            walkPointSet = true;
-        }
-    }
-
-    private void ChasePlayer()
-    {
-        if (isSlowed)
-        {
-            if (slowtimer)
+            found = Physics.CheckSphere(transform.position, sightRange, playerLayer);
+            near = Physics.CheckSphere(transform.position, attackRange, playerLayer);
+            if (found)
             {
-                slowStartTime += Time.deltaTime;
-                navAgent.isStopped = true;
-                if (slowStartTime >= slowDuration)
+                //Debug.Log("Found");
+                transform.LookAt(player.transform);
+                Vector3 vel = rb.velocity;
+
+                if (near)
                 {
-                    navAgent.isStopped = false;
-                    isSlowed = false;
-                    slowtimer = false;
-                    slowStartTime = 0f;
-                    slowDuration = 4f;
+
+                    GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+                    GetComponent<Rigidbody>().AddForce(slowRate * 0.8f * speed * multiplier * Time.deltaTime * transform.forward);
+
+                    //GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
                 }
+                if (!near && vel.x > -velLimit && vel.x < velLimit && vel.z > -velLimit && vel.z < velLimit)
+                {
+                    grounded = Physics.Raycast(transform.position, Vector3.down, 1f, Ground);
+                    GetComponent<Rigidbody>().AddForce(slowRate * speed * multiplier * Time.deltaTime * transform.forward);
+
+                    if (grounded)
+                    {
+                        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+                        rb.AddForce(slowRate * transform.up * jumpForce, ForceMode.Impulse);
+                    }
+                }
+
             }
+            else
+            {
+
+            }
+            if (rb.velocity.magnitude > 0.2f)
+            {
+                isMoving = true;
+            }
+            else
+                isMoving = false;
+
+            if (canAttack && near)
+            {
+                isAttacking = true;
+                canAttack = false;
+                Attack();
+                Invoke(nameof(AttackReset), AttackCoolDown);
+            }
+
 
         }
         else
         {
-            navAgent.SetDestination(player.position);
-            //animator.SetBool("Run", run);
-            //animator.SetFloat("Velocity", 0.6f);
-            navAgent.isStopped = false; // Add this line     
+
+            //transform.localScale = new Vector3(transform.localScale.x , transform.localScale.y*0.3f, transform.localScale.z);
+            //
+            Destroy(gameObject);
+            if (!dropped)
+            {
+                dropped = true;
+                if (DropEffect != null)
+                    Instantiate(DropEffect, new Vector3(transform.position.x + Random.Range(-3f, 3f), transform.position.y, transform.position.z + Random.Range(-3f, 3f)), transform.rotation);
+                if (Drop != null)
+                    Instantiate(Drop, new Vector3(transform.position.x + Random.Range(-3f, 3f), transform.position.y, transform.position.z + Random.Range(-3f, 3f)), transform.rotation);
+            }
+
         }
 
     }
 
-
-    private void AttackPlayer()
+    private void Attack()
     {
-        navAgent.SetDestination(transform.position);
-
-        if (!alreadyAttacked)
+        animator.SetTrigger("Attack");
+        if (GetComponent<AudioSource>() != null)
+        { 
+            GetComponent<AudioSource>()?.Play(); 
+        }
+        GameObject fireshoot = Instantiate(fire, fireSpawnPoint.position, Quaternion.Euler(0f, -90f, 0f));
+        fireshoot.transform.SetParent(transform);   
+        Destroy(fireshoot, 5f);
+        /*
+        if (atkParticle != null)
         {
-            transform.LookAt(player.position);
-            alreadyAttacked = true;
-            //animator.SetTrigger("Attack");
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
 
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
-            {
-                /*
-                    YOU CAN USE THIS TO GET THE PLAYER HUD AND CALL THE TAKE DAMAGE FUNCTION
-
-                PlayerHUD playerHUD = hit.transform.GetComponent<PlayerHUD>();
-                if (playerHUD != null)
-                {
-                   playerHUD.takeDamage(damage);
-                }
-                 */
-            }
-
-            
-
-            //Invoke("ResumeMovement", 5f);
+            //Instantiate(atkParticle, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
             GameObject fireshoot = Instantiate(fire, fireSpawnPoint.position, Quaternion.Euler(0f, -90f, 0f));
             fireshoot.transform.SetParent(transform);
             //Rigidbody rb = Instantiate(fire, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
 
             //rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
             //rb.AddForce(transform.up * 8f, ForceMode.Impulse);          
-            Destroy(fireshoot,5f);
-
-        }
+            Destroy(fireshoot, 5f);
+        }*/
+        //player.GetComponent<PlayerValue>().HP -= atk;
     }
-    void ResumeMovement()
+    private void AttackReset()
     {
-        navAgent.isStopped = false;
-    }
-
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-        //animator.SetTrigger("Attack");
-        //animator.SetBool("Attack", false);
+        canAttack = true;
     }
 
     public void TakeDamage(float damage)
     {
-        //animator.SetTrigger("EnemyHurt");
-        health -= damage;
-        GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
-        //hitEffect.Play();
-        Destroy(hitEffect, 1f);
-        //StartCoroutine(TakeDamageCoroutine());
-
-        if (health <= 0)
+        Debug.Log(gameObject + "enemy2 hurt" + HP.ToString());
+        animator.SetTrigger("EnemyHurt");
+        HP -= damage;
+        if (hitEffectPrefab != null)
         {
+            GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+            Destroy(hitEffect, 1f);
+        }
 
-           // animator.SetTrigger("Die");
-            //scriptAReference.score += 1;           
-            // Debug.Log(scriptAReference.score);
-            Die();
-            //Invoke(nameof(DestroyEnemy), 0.5f);
+        if (HP <= 0)
+        {
+            animator.SetTrigger("Die");
+            alive = false;
         }
     }
-    void Die()
-    {
-        // Perform any death-related logic here (e.g., play death animation, drop items, etc.)
-        CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
-        if (capsuleCollider != null)
-        {
-            capsuleCollider.enabled = false;
-        }
-        // Destroy the enemy GameObject
-        Invoke("Reward", 2f);
-        Destroy(gameObject, 2f);
-    }
 
-    public void Reward()
+    private void animatorSet()
     {
-        float lucky = Random.Range(0f, 1f);
-        if (lucky <= luckypoint)
-        {
-            GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);
-            //hitEffect.Play();
-            Destroy(RewardEffect, 1f);
-            //float lucky = UnityEngine.Random.Range(0, 100);
-            GameObject reward = Instantiate(rewardPrefab, transform.position, Quaternion.identity);
-        }
+        animator.SetBool("Walk", isMoving);
+        animator.SetBool("dead", !alive);
     }
 
     private void OnDrawGizmosSelected()
@@ -252,4 +191,61 @@ public class Enemy2 : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
+
+    public void enfreeze()
+    {
+        slowRate = 0f;
+        Invoke("enResetspeed", 4f);
+    }
+
+
+    public void enResetspeed()
+    {
+        slowRate = 1f;
+    }
 }
+
+
+/*
+ *  //attack
+    public GameObject fire;
+    public Transform fireSpawnPoint;
+    public GameObject rewardPrefab;
+private void AttackPlayer()
+{
+    navAgent.SetDestination(transform.position);
+
+    if (!alreadyAttacked)
+    {
+        transform.LookAt(player.position);
+        alreadyAttacked = true;
+        //animator.SetTrigger("Attack");
+        Invoke(nameof(ResetAttack), timeBetweenAttacks);
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
+        {
+            /*
+                YOU CAN USE THIS TO GET THE PLAYER HUD AND CALL THE TAKE DAMAGE FUNCTION
+
+            PlayerHUD playerHUD = hit.transform.GetComponent<PlayerHUD>();
+            if (playerHUD != null)
+            {
+               playerHUD.takeDamage(damage);
+            }
+             
+        }
+
+
+
+        //Invoke("ResumeMovement", 5f);
+        GameObject fireshoot = Instantiate(fire, fireSpawnPoint.position, Quaternion.Euler(0f, -90f, 0f));
+        fireshoot.transform.SetParent(transform);
+        //Rigidbody rb = Instantiate(fire, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+
+        //rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
+        //rb.AddForce(transform.up * 8f, ForceMode.Impulse);          
+        Destroy(fireshoot, 5f);
+
+    }
+}*/

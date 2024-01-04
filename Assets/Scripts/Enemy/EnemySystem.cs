@@ -59,7 +59,7 @@ public class EnemySystem : MonoBehaviour
             near = Physics.CheckSphere(transform.position, attackRange, playerLayer);
             if (found)
             {
-                Debug.Log("Found");
+                //Debug.Log("Found");
                 transform.LookAt(player.transform);
                 Vector3 vel = rb.velocity;
 
