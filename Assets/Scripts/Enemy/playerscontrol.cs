@@ -24,6 +24,7 @@ public class playerscontrol : MonoBehaviour
     public float damage = 50f;
     public float armor = 1f;
     public float lucky = 1f;
+    public float attackrate = 1f;
     // Start is called before the first frame update
     void Start()
     {

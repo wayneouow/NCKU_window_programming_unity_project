@@ -207,7 +207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2611149553095877767
 Transform:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -317,15 +317,15 @@ MonoBehaviour:
     m_Bits: 64
   isMoving: 0
   speed: 10
-  velLimit: 2
+  velLimit: 6
   multiplier: 138
   Ground:
     serializedVersion: 2
     m_Bits: 1536
   grounded: 0
   jumpForce: 1
-  sightRange: 21.3
-  attackRange: 11.74
+  sightRange: 40
+  attackRange: 9
   hitEffectPrefab: {fileID: 0}
   MaxHP: 100
   HP: 100
@@ -341,6 +341,7 @@ MonoBehaviour:
   projectile: {fileID: 6604001239244680799, guid: 5e2442c1d6ea63d4cb661a15affd2980,
     type: 3}
   atkpoint: {fileID: 7773551018948607416}
+  luckypoint: 0.25
 --- !u!1 &2611149553095981225
 GameObject:
   m_ObjectHideFlags: 0

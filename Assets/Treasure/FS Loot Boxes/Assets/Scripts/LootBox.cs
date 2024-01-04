@@ -157,6 +157,8 @@ public class LootBox : MonoBehaviour
         // calls the OnBoxOpen event and deliver the
         // earned GameObjects on temp list
         OnBoxOpen?.Invoke(loots.ToArray());
+
+        Destroy(gameObject,2f);
     }
 
     /// <summary>

@@ -45,6 +45,8 @@ public class EnemySystem : MonoBehaviour
 
     Rigidbody rb;
     Animator animator;
+    //reward
+    public float luckypoint = 0.25f;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -109,20 +111,42 @@ public class EnemySystem : MonoBehaviour
         {
 
             //transform.localScale = new Vector3(transform.localScale.x , transform.localScale.y*0.3f, transform.localScale.z);
-            //
-            Destroy(gameObject);
+            //treasure
+            //Destroy(gameObject);
             if (!dropped)
             {
                 dropped = true;
                 if(DropEffect != null)
-                    Instantiate(DropEffect, new Vector3(transform.position.x + Random.Range(-3f, 3f), transform.position.y, transform.position.z + Random.Range(-3f, 3f)), transform.rotation);
+                    Instantiate(DropEffect, new Vector3(transform.position.x , transform.position.y, transform.position.z), transform.rotation);
                 if (Drop != null)
-                    Instantiate(Drop, new Vector3(transform.position.x + Random.Range(-3f, 3f), transform.position.y, transform.position.z + Random.Range(-3f, 3f)), transform.rotation);
+                {
+                    Invoke("Reward", 2f);
+                    Destroy(gameObject, 2f);
+                    //GameObject reward= Instantiate(Drop, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+                   
+                }
             }
             
         }
         
     }
+
+    public void Reward()
+    {
+        GameObject player = GameObject.Find("Player");
+        float maxlucky = player.GetComponent<playerscontrol>().lucky;
+        float lucky = Random.Range(0f, maxlucky);
+        //Debug.Log("隨機幸運"+lucky +"vs 敵人幸運" +luckypoint);
+        if (lucky <= luckypoint)
+        {
+            //GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);
+            //hitEffect.Play();
+            //Destroy(RewardEffect, 1f);
+            //float lucky = UnityEngine.Random.Range(0, 100);
+            GameObject reward = Instantiate(Drop, transform.position, Quaternion.identity);
+        }
+    }
+
 
     private void Attack()
     {
@@ -142,10 +166,12 @@ public class EnemySystem : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        GameObject player = GameObject.Find("Player");
+        float attackrate = player.GetComponent<playerscontrol>().attackrate;
         Debug.Log(gameObject + "enemy hurt" + HP.ToString());
         animator.SetTrigger("EnemyHurt");
-        HP -= damage;
-        if(hitEffectPrefab != null)
+        HP -= (damage * attackrate);
+        if (hitEffectPrefab != null)
         {
             GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
             Destroy(hitEffect, 1f);
