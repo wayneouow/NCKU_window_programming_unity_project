@@ -67,9 +67,17 @@ public class CustomBullet : MonoBehaviour
             {
 
             }
-            if (enemies[i].GetComponent<Enemy3>() != null)
+            if (enemies[i].GetComponent<TornatoEnemy>() != null)
             {
-                enemies[i].GetComponent<Enemy3>().TakeDamage(explosionDamage);
+                enemies[i].GetComponent<TornatoEnemy>().TakeDamage(explosionDamage);
+            }
+            else
+            {
+
+            }
+            if (enemies[i].GetComponent<EnemyGhost>() != null)
+            {
+                enemies[i].GetComponent<EnemyGhost>().TakeDamage(explosionDamage);
             }
             else
             {

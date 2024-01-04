@@ -1,10 +1,8 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Enemy2 : MonoBehaviour
+public class EnemyGhost : MonoBehaviour
 {
     public bool found = false;
     public bool lookat = false;
@@ -47,10 +45,6 @@ public class Enemy2 : MonoBehaviour
 
     Rigidbody rb;
     Animator animator;
-    public GameObject fire;
-    public Transform fireSpawnPoint;
-    public GameObject rewardPrefab;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -68,7 +62,7 @@ public class Enemy2 : MonoBehaviour
                 //Debug.Log("Found");
                 transform.LookAt(player.transform);
                 Vector3 vel = rb.velocity;
-
+                rb.useGravity = false;
                 if (near)
                 {
 
@@ -92,8 +86,7 @@ public class Enemy2 : MonoBehaviour
             }
             else
             {
-                transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y, 0f);
-                rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+                rb.useGravity = true;
             }
             if (rb.velocity.magnitude > 0.2f)
             {
@@ -121,39 +114,25 @@ public class Enemy2 : MonoBehaviour
             if (!dropped)
             {
                 dropped = true;
-                if (DropEffect != null)
+                if(DropEffect != null)
                     Instantiate(DropEffect, new Vector3(transform.position.x + Random.Range(-3f, 3f), transform.position.y, transform.position.z + Random.Range(-3f, 3f)), transform.rotation);
                 if (Drop != null)
                     Instantiate(Drop, new Vector3(transform.position.x + Random.Range(-3f, 3f), transform.position.y, transform.position.z + Random.Range(-3f, 3f)), transform.rotation);
             }
-
+            
         }
-
+        
     }
 
     private void Attack()
     {
         animator.SetTrigger("Attack");
-        if (GetComponent<AudioSource>() != null)
-        { 
-            GetComponent<AudioSource>()?.Play(); 
-        }
-        GameObject fireshoot = Instantiate(fire, fireSpawnPoint.position, Quaternion.Euler(0f, 90f, 0f));
-        fireshoot.transform.SetParent(fireSpawnPoint);   
-        Destroy(fireshoot, 4f);
-        /*
-        if (atkParticle != null)
+        if(GetComponent<AudioSource>() != null)
+            GetComponent<AudioSource>()?.Play();
+        if(atkParticle != null)
         {
-
-            //Instantiate(atkParticle, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
-            GameObject fireshoot = Instantiate(fire, fireSpawnPoint.position, Quaternion.Euler(0f, -90f, 0f));
-            fireshoot.transform.SetParent(transform);
-            //Rigidbody rb = Instantiate(fire, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-
-            //rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
-            //rb.AddForce(transform.up * 8f, ForceMode.Impulse);          
-            Destroy(fireshoot, 5f);
-        }*/
+            Instantiate(atkParticle, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+        }
         //player.GetComponent<PlayerValue>().HP -= atk;
     }
     private void AttackReset()
@@ -163,15 +142,15 @@ public class Enemy2 : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log(gameObject + "enemy2 hurt" + HP.ToString());
+        Debug.Log(gameObject + "enemy hurt" + HP.ToString());
         animator.SetTrigger("EnemyHurt");
         HP -= damage;
-        if (hitEffectPrefab != null)
+        if(hitEffectPrefab != null)
         {
             GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
             Destroy(hitEffect, 1f);
         }
-
+            
         if (HP <= 0)
         {
             animator.SetTrigger("Die");
@@ -185,7 +164,13 @@ public class Enemy2 : MonoBehaviour
         animator.SetBool("dead", !alive);
     }
 
-    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
 
     public void enfreeze()
     {
@@ -198,58 +183,4 @@ public class Enemy2 : MonoBehaviour
     {
         slowRate = 1f;
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
-    }
-}   
-    
-
-
-/*
- *  //attack
-    public GameObject fire;
-    public Transform fireSpawnPoint;
-    public GameObject rewardPrefab;
-private void AttackPlayer()
-{
-    navAgent.SetDestination(transform.position);
-
-    if (!alreadyAttacked)
-    {
-        transform.LookAt(player.position);
-        alreadyAttacked = true;
-        //animator.SetTrigger("Attack");
-        Invoke(nameof(ResetAttack), timeBetweenAttacks);
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
-        {
-            /*
-                YOU CAN USE THIS TO GET THE PLAYER HUD AND CALL THE TAKE DAMAGE FUNCTION
-
-            PlayerHUD playerHUD = hit.transform.GetComponent<PlayerHUD>();
-            if (playerHUD != null)
-            {
-               playerHUD.takeDamage(damage);
-            }
-             
-        }
-
-
-
-        //Invoke("ResumeMovement", 5f);
-        GameObject fireshoot = Instantiate(fire, fireSpawnPoint.position, Quaternion.Euler(0f, -90f, 0f));
-        fireshoot.transform.SetParent(transform);
-        //Rigidbody rb = Instantiate(fire, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-
-        //rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
-        //rb.AddForce(transform.up * 8f, ForceMode.Impulse);          
-        Destroy(fireshoot, 5f);
-
-    }
-}*/
+}

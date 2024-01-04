@@ -27,9 +27,25 @@ public class Attack3 : MonoBehaviour
             //scriptBInstance.IsSlow = true;
             //player.health -= damage;
             player.TakeDagme(damage);
-            otherRigidbody.AddForce(transform.up * 20f, ForceMode.Impulse);
+            otherRigidbody.AddForce(transform.up * 6f, ForceMode.Impulse);
             //enemy.GetSlow(true);
         }
 
     }
+
+    //void OnCollisionEnter(Collision other)
+    //{
+
+    //    if (other.gameObject.CompareTag("Player"))
+    //    {
+    //        playerscontrol player = other.gameObject.GetComponent<playerscontrol>();
+    //        Rigidbody otherRigidbody = other.gameObject.GetComponent<Rigidbody>();
+    //        //scriptBInstance.IsSlow = true;
+    //        //player.health -= damage;
+    //        player.TakeDagme(damage);
+    //        otherRigidbody.AddForce(transform.up * 10f, ForceMode.Impulse);
+    //        //enemy.GetSlow(true);
+    //    }
+
+    //}
 }

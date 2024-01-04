@@ -45,6 +45,9 @@ public class TornatoEnemy : MonoBehaviour
 
     Rigidbody rb;
     Animator animator;
+
+    public GameObject projectile;
+    public Transform atkpoint;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -66,13 +69,14 @@ public class TornatoEnemy : MonoBehaviour
                 if (near)
                 {
 
-                    GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-                    GetComponent<Rigidbody>().AddForce(slowRate * 0.8f * speed * multiplier * Time.deltaTime * transform.forward);
+                    //GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+                    //GetComponent<Rigidbody>().AddForce(slowRate * 0.8f * speed * multiplier * Time.deltaTime * transform.forward);
 
                     //GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
                 }
                 if (!near && vel.x > -velLimit && vel.x < velLimit && vel.z > -velLimit && vel.z < velLimit)
                 {
+                    Debug.Log("move");
                     grounded = Physics.Raycast(transform.position, Vector3.down, 1f, Ground);
                     GetComponent<Rigidbody>().AddForce(slowRate * speed * multiplier * Time.deltaTime * transform.forward);
 
@@ -86,7 +90,8 @@ public class TornatoEnemy : MonoBehaviour
             }
             else
             {
-
+                transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y, 0f);
+                rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             }
             if (rb.velocity.magnitude > 0.2f)
             {
@@ -132,6 +137,14 @@ public class TornatoEnemy : MonoBehaviour
         if (atkParticle != null)
         {
             Instantiate(atkParticle, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+        }
+        if(projectile!= null)
+        {
+            transform.LookAt(player.transform);
+            Rigidbody torna = Instantiate(projectile,atkpoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+            torna.AddForce(new Vector3(transform.forward.x, 0f, 0f) * 3f,ForceMode.Impulse);
+            //torna.AddForce(transform.up * 1f, ForceMode.Impulse);
+            Destroy(torna.gameObject,4f);
         }
         //player.GetComponent<PlayerValue>().HP -= atk;
     }
@@ -184,4 +197,3 @@ public class TornatoEnemy : MonoBehaviour
         slowRate = 1f;
     }
 }
-
