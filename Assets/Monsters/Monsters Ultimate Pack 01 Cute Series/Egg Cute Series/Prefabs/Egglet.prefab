@@ -301,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7610133508914092143
 Transform:
   m_ObjectHideFlags: 0
@@ -330,7 +330,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7610133508913661007}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 41aabd28057676a4d86e63afad06f6a1, type: 3}
   m_Controller: {fileID: 9100000, guid: 266b57c68cb47ee43951393fd5a002d4, type: 2}
   m_CullingMode: 1
@@ -410,7 +410,9 @@ MonoBehaviour:
   AttackCoolDown: 0.7
   isAttacking: 0
   atk: 10
-  atkParticle: {fileID: 0}
+  atkParticle: {fileID: 1545806602296978, guid: 9e4577abe56a95f4a91d29a0473cd30c,
+    type: 3}
+  atkpoint: {fileID: 7610133508914092143}
   slimeSound: {fileID: 0}
   luckypoint: 0.25
 --- !u!136 &8637223089308801229

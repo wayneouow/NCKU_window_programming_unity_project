@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class EnemySystem : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class EnemySystem : MonoBehaviour
     public bool isAttacking = false;
     public float atk = 10;
     public GameObject atkParticle;
-
+    public Transform atkpoint;
     [Header("Sound")]
     public AudioClip slimeSound;
 
@@ -123,7 +124,6 @@ public class EnemySystem : MonoBehaviour
                     Invoke("Reward", 2f);
                     Destroy(gameObject, 2f);
                     //GameObject reward= Instantiate(Drop, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
-                   
                 }
             }
             
@@ -153,9 +153,13 @@ public class EnemySystem : MonoBehaviour
         animator.SetTrigger("Attack");
         if(GetComponent<AudioSource>() != null)
             GetComponent<AudioSource>()?.Play();
-        if(atkParticle != null)
+        if (atkParticle != null)
         {
-            Instantiate(atkParticle, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+            transform.LookAt(player.transform);
+            Rigidbody torna = Instantiate(atkParticle, atkpoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+            torna.AddForce(new Vector3(transform.forward.x, 0f, 0f) * 3f, ForceMode.Impulse);
+            //torna.AddForce(transform.up * 1f, ForceMode.Impulse);
+            Destroy(torna.gameObject, 4f);
         }
         //player.GetComponent<PlayerValue>().HP -= atk;
     }
@@ -187,7 +191,8 @@ public class EnemySystem : MonoBehaviour
     private void animatorSet()
     {
         animator.SetBool("Walk", isMoving);
-        animator.SetBool("dead", !alive);
+        //animator.SetBool("dead", !alive);
+        
     }
 
     private void OnDrawGizmosSelected()

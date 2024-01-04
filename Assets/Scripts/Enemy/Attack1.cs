@@ -26,6 +26,7 @@ public class Attack1 : MonoBehaviour
             playerscontrol player = other.GetComponent<playerscontrol>();
             //scriptBInstance.IsSlow = true;
             //player.health -= damage;
+            Debug.Log("player-HP");
             player.TakeDagme(damage);
             //enemy.GetSlow(true);
         }

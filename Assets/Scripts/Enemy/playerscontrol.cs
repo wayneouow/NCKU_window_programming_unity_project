@@ -62,6 +62,7 @@ public class playerscontrol : MonoBehaviour
     }*/
     public void TakeDagme(float damage)
     {
+        Debug.Log("player remain hp:"+health);
         damage = damage * armor;
         if(immune==false)
         {

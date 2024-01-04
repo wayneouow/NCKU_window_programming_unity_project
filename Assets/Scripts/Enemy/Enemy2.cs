@@ -204,7 +204,7 @@ public class Enemy2 : MonoBehaviour
     private void animatorSet()
     {
         animator.SetBool("Walk", isMoving);
-        animator.SetBool("dead", !alive);
+        //animator.SetBool("dead", !alive);
     }
 
     

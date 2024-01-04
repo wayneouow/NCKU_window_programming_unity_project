@@ -3566,6 +3566,11 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4524045572460584640, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4524045572464762880, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17286,6 +17291,11 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4524045572460584640, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4524045572467879168, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
         type: 3}
       propertyPath: m_Name
@@ -17374,6 +17384,11 @@ PrefabInstance:
       objectReference: {fileID: 1623225821}
     - target: {fileID: 5276992134526215456, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
         type: 3}
+      propertyPath: atkpoint
+      value: 
+      objectReference: {fileID: 1304261114}
+    - target: {fileID: 5276992134526215456, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -17382,6 +17397,18 @@ PrefabInstance:
       propertyPath: multiplier
       value: 137.3
       objectReference: {fileID: 0}
+    - target: {fileID: 5276992134526215456, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
+        type: 3}
+      propertyPath: atkParticle
+      value: 
+      objectReference: {fileID: 1545806602296978, guid: 9e4577abe56a95f4a91d29a0473cd30c,
+        type: 3}
+    - target: {fileID: 5276992134526215456, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
+        type: 3}
+      propertyPath: hitEffectPrefab
+      value: 
+      objectReference: {fileID: 1545806602296978, guid: 9e4577abe56a95f4a91d29a0473cd30c,
+        type: 3}
     - target: {fileID: 7007572462875201866, guid: 478a472dd6ec52e4fbc9c3ae78f2b558,
         type: 3}
       propertyPath: player
@@ -27062,9 +27089,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy1Prefab: {fileID: 1704994100}
-  enemy2Prefab: {fileID: 2000730497}
+  enemy2Prefab: {fileID: 140231216}
   enemy3Prefab: {fileID: 1923338761}
-  enemy4Prefab: {fileID: 1638007183}
+  enemy4Prefab: {fileID: 2000730497}
   numberOfEnemiesToSpawn: 5
   spawnInterval: 5
   spawnRadius: 10
@@ -58166,12 +58193,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &1638007183 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1734572081990470152, guid: 7f3425f16f17470468f250a8fd950f73,
-    type: 3}
-  m_PrefabInstance: {fileID: 1255396807}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1643537561
 GameObject:
   m_ObjectHideFlags: 0

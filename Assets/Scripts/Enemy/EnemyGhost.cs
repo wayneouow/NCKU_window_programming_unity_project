@@ -183,7 +183,7 @@ public class EnemyGhost : MonoBehaviour
     private void animatorSet()
     {
         animator.SetBool("Walk", isMoving);
-        animator.SetBool("dead", !alive);
+        //animator.SetBool("dead", !alive);
     }
 
     private void OnDrawGizmosSelected()
