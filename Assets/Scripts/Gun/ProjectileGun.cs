@@ -39,6 +39,12 @@ public class ProjectileGun : MonoBehaviour
 
     public CamRecoil camrecoil;
 
+    
+
+    public float recoilX;
+    public float recoilY;
+    public float recoilZ;
+
     private void Start()
     {
 
@@ -136,10 +142,10 @@ public class ProjectileGun : MonoBehaviour
         //if more than one bulletsPerTap make sure to repeat shoot function
         if (bulletsShot < bulletsPerTap && bulletsLeft > 0)
             Invoke("Shoot", timeBetweenShots);
-        
+
         //CamRecoil
         camrecoil.RecoilFire();
-        
+
 
     }
     private void ResetShot()
@@ -163,4 +169,5 @@ public class ProjectileGun : MonoBehaviour
         reloading = false;
         animator.SetBool("Reloading", false);
     }
+
 }

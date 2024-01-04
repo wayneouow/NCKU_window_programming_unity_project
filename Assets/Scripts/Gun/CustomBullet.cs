@@ -122,7 +122,12 @@ public class CustomBullet : MonoBehaviour
         physics_mat.frictionCombine = PhysicMaterialCombine.Minimum;
         physics_mat.bounceCombine = PhysicMaterialCombine.Maximum;
         //Assign material to collider
-        GetComponent<SphereCollider>().material = physics_mat;
+        if(GetComponent<SphereCollider>() != null)
+            GetComponent<SphereCollider>().material = physics_mat;
+        else if (GetComponent<BoxCollider>() != null)
+            GetComponent<BoxCollider>().material = physics_mat;
+        else if (GetComponent<CapsuleCollider>() != null)
+            GetComponent<CapsuleCollider>().material = physics_mat;
 
         //Set gravity
         rb.useGravity = useGravity;
