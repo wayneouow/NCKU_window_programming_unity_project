@@ -827,5 +827,5 @@ MonoBehaviour:
   selectedSkills: []
   haschoose: 0
   choose: 0
-  canvas: {fileID: 0}
+  canvas: {fileID: 3517728614314510215}
   isShow: 0

@@ -310,8 +310,8 @@ MonoBehaviour:
     m_Bits: 1536
   grounded: 0
   jumpForce: 1
-  sightRange: 10
-  attackRange: 2
+  sightRange: 15
+  attackRange: 5.88
   hitEffectPrefab: {fileID: 0}
   MaxHP: 100
   HP: 100
@@ -319,7 +319,7 @@ MonoBehaviour:
   Drop: {fileID: 0}
   DropEffect: {fileID: 0}
   canAttack: 1
-  AttackCoolDown: 0.7
+  AttackCoolDown: 1
   isAttacking: 0
   atk: 10
   atkParticle: {fileID: 0}
@@ -327,6 +327,7 @@ MonoBehaviour:
   fire: {fileID: 1195763144623700, guid: e3f51bdcff843ab42a172b197a71296f, type: 3}
   fireSpawnPoint: {fileID: 4602346945395308315}
   rewardPrefab: {fileID: 0}
+  luckypoint: 0.25
 --- !u!1 &1734572081990470154
 GameObject:
   m_ObjectHideFlags: 0
@@ -2426,7 +2427,7 @@ Transform:
   m_GameObject: {fileID: 5061748403725855826}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

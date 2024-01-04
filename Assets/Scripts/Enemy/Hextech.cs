@@ -24,6 +24,8 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     //skill reset
     float originwalkSpeed;
     float originjumpForce;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,10 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
         }
         if (isShow == true)
         {
+            GameObject camera = GameObject.Find("ItemHoldingR");
+            camera.GetComponent<WeaponSwitching>().enabled = false;
+            Time.timeScale = 0f;
+            
             canvas.enabled = true;
             float scroll = Input.GetAxis("Mouse ScrollWheel");
 
@@ -57,8 +63,10 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
                 HandleMouseScroll(scroll);
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
+                camera.GetComponent<WeaponSwitching>().enabled = true;
+                Time.timeScale = 1f;
                 string selectedSkill = selectedSkills[choose];
                 canvas.enabled = false;
                 isShow = false;
@@ -192,10 +200,10 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
             GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject obj in objectsWithTag)
             {
-                EnemyControl enemyControl = obj.GetComponent<EnemyControl>();
+                EnemyGhost enemyControl = obj.GetComponent<EnemyGhost>();
                 if(enemyControl != null)
                 {
-                    enemyControl.Die();
+                    enemyControl.HP = 0;
                 }
                
                 //Destroy(obj);
@@ -205,14 +213,14 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
         {
             GameObject player = GameObject.Find("Player");
             originjumpForce = player.GetComponent<PlayerMovementAdvanced>().jumpForce;
-            player.GetComponent<PlayerMovementAdvanced>().jumpForce = 50;
+            player.GetComponent<PlayerMovementAdvanced>().jumpForce = 30;
             Invoke("ResetJumpForce", 5f);
         }
         else if (index == 5)
         {
             GameObject player = GameObject.Find("Player");
-            float damage = player.GetComponent<playerscontrol>().damage;
-            player.GetComponent<playerscontrol>().damage = damage * 1.25f;
+            float rate = player.GetComponent<playerscontrol>().attackrate;
+            player.GetComponent<playerscontrol>().attackrate = rate * 1.25f;
         }
         else if (index == 6)
         {

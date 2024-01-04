@@ -555,10 +555,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3027125209394520476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a88f58d3ce8b2d49b774f0ecbf6335e, type: 3}
+  m_Script: {fileID: 11500000, guid: 86e626c429922b143a9ab32c6a15c21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 3517728614314510215, guid: 6ff083f96ccc150469a9686fab32a52b, type: 3}
 --- !u!1 &3335560088448457042
 GameObject:
   m_ObjectHideFlags: 0
