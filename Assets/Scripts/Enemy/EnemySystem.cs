@@ -136,7 +136,7 @@ public class EnemySystem : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         float maxlucky = player.GetComponent<playerscontrol>().lucky;
         float lucky = Random.Range(0f, maxlucky);
-        //Debug.Log("隨機幸運"+lucky +"vs 敵人幸運" +luckypoint);
+
         if (lucky <= luckypoint)
         {
             //GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);
@@ -156,12 +156,12 @@ public class EnemySystem : MonoBehaviour
         if (atkParticle != null)
         {
             transform.LookAt(player.transform);
-            Rigidbody torna = Instantiate(atkParticle, atkpoint.position, Quaternion.identity).GetComponent<Rigidbody>();
-            torna.AddForce(new Vector3(transform.forward.x, 0f, 0f) * 3f, ForceMode.Impulse);
-            //torna.AddForce(transform.up * 1f, ForceMode.Impulse);
-            Destroy(torna.gameObject, 4f);
+            //Rigidbody torna = Instantiate(atkParticle, atkpoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+            //torna.AddForce(new Vector3(transform.forward.x, 0f, 0f) * 3f, ForceMode.Impulse);
+            ////torna.AddForce(transform.up * 1f, ForceMode.Impulse);
+            //Destroy(torna.gameObject, 4f);
         }
-        //player.GetComponent<PlayerValue>().HP -= atk;
+        player.GetComponent<playerscontrol>().health -= atk;
     }
     private void AttackReset()
     {

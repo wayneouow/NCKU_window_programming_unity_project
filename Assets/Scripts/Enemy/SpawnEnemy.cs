@@ -9,13 +9,21 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] GameObject enemy2Prefab;
     [SerializeField] GameObject enemy3Prefab;
     [SerializeField] GameObject enemy4Prefab;
+    [SerializeField] GameObject enemy5Prefab;
 
-    [SerializeField] int numberOfEnemiesToSpawn;
-    public float spawnInterval = 20f;
+    public int n1= 20;
+    public int n2= 20;
+    public int n3 = 20;
+    public int n4 = 10;
+    public int n5 = 1;
+
+
+    public float spawnInterval = 10f;
     public float spawnRadius = 10f;
     public int wave = 0;
     public int score = 0;
 
+    public AudioClip BossComing;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +34,12 @@ public class SpawnEnemy : MonoBehaviour
         StartCoroutine(SpawnEnemies_2());
         StartCoroutine(SpawnEnemies_3());
         StartCoroutine(SpawnEnemies_4());
+        StartCoroutine(SpawnEnemies_5());
     }
 
     IEnumerator SpawnEnemies_1()
     {
-        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        for (int i = 0; i < n1; i++)
         {
             Spawn_Enemy1();
             yield return new WaitForSeconds(spawnInterval);
@@ -40,7 +49,7 @@ public class SpawnEnemy : MonoBehaviour
     IEnumerator SpawnEnemies_2()
     {
         yield return new WaitForSeconds(10f);
-        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        for (int i = 0; i < n2; i++)
         {
             Spawn_Enemy2();
             yield return new WaitForSeconds(spawnInterval);
@@ -49,7 +58,7 @@ public class SpawnEnemy : MonoBehaviour
     IEnumerator SpawnEnemies_3()
     {
         yield return new WaitForSeconds(20f);
-        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        for (int i = 0; i < n3; i++)
         {
             Spawn_Enemy3();
             yield return new WaitForSeconds(spawnInterval);
@@ -58,14 +67,24 @@ public class SpawnEnemy : MonoBehaviour
     IEnumerator SpawnEnemies_4()
     {
         yield return new WaitForSeconds(30f);
-        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        for (int i = 0; i < n4; i++)
         {
             Spawn_Enemy4();
             yield return new WaitForSeconds(spawnInterval);
         }
     }
+    IEnumerator SpawnEnemies_5()
+    {
+        yield return new WaitForSeconds(50f);
+        for (int i = 0; i < n5; i++)
+        {
+            Spawn_Enemy5();
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
     void Spawn_Enemy1()
     {
+
         Vector3 randomPosition = Random.insideUnitSphere * spawnRadius;
         //randomPosition += PlayerManager.instance.player.transform.position;
         GameObject player = GameObject.FindWithTag("Player");
@@ -106,6 +125,20 @@ public class SpawnEnemy : MonoBehaviour
 
         GameObject newEn4 = Instantiate(enemy4Prefab, randomPosition, Quaternion.identity);
         newEn4.gameObject.SetActive(true);
+    }
+    void Spawn_Enemy5()
+    {
+
+
+        GetComponent<AudioSource>().PlayOneShot(BossComing);
+        Vector3 randomPosition = Random.insideUnitSphere * spawnRadius;
+        //randomPosition += PlayerManager.instance.player.transform.position;
+        GameObject player = GameObject.FindWithTag("Player");
+        randomPosition += player.transform.position;
+        randomPosition.y = 40f;
+
+        GameObject newEn5 = Instantiate(enemy5Prefab, randomPosition, Quaternion.identity);
+        newEn5.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

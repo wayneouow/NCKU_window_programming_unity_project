@@ -133,7 +133,7 @@ public class EnemyGhost : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         float maxlucky = player.GetComponent<playerscontrol>().lucky;
         float lucky = Random.Range(0f, maxlucky);
-        //Debug.Log("隨機幸運"+lucky +"vs 敵人幸運" +luckypoint);
+
         if (lucky <= luckypoint)
         {
             //GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);

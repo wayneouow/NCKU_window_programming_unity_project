@@ -28,7 +28,7 @@ public class Ability3 : MonoBehaviour
     void Update()
     {
         // update preview position
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             show = true;
             cancle = false;
@@ -44,7 +44,7 @@ public class Ability3 : MonoBehaviour
             UpdateFakePreviewPosition();
         }
         // click to make real prefab
-        if (Input.GetMouseButtonDown(0) && show )
+        if (Input.GetMouseButtonDown(2) && show )
         {
             GenerateRealPrefab();
             show = false;

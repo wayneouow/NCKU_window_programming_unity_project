@@ -79,14 +79,14 @@ public class Hextech : MonoBehaviour//, IPointerClickHandler
     }
     void InitializeSkillList()
     {
-        skillList.Add("skill1:player full hp");
-        skillList.Add("skill2:speed up");
-        skillList.Add("skill3:Invincible for 5 seconds");
-        skillList.Add("skill4:destroy all little enemies");
-        skillList.Add("skill5:jump higher for 5 seconds");
-        skillList.Add("skill6:+25% attack");
-        skillList.Add("skill7:+25% armor");
-        skillList.Add("skill8:+25% lucky");
+        skillList.Add("player full hp");
+        skillList.Add("speed up");
+        skillList.Add("Invincible for 5 seconds");
+        skillList.Add("destroy all little enemies");
+        skillList.Add("jump higher for 5 seconds");
+        skillList.Add("+25% attack");
+        skillList.Add("+25% armor");
+        skillList.Add("+25% lucky");
     }
     void GenerateRandomSkills()
     {

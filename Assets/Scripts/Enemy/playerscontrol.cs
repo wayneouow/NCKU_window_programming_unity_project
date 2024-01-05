@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerscontrol : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class playerscontrol : MonoBehaviour
     public float armor = 1f;
     public float lucky = 1f;
     public float attackrate = 1f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,16 +38,12 @@ public class playerscontrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        //WASD
-        Move();
-        //Space
-        //
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(health <= 0)
         {
-            rb.AddForce(JumpingForce * Vector3.up);
+            health = 0;
+            Gameover();
         }
-        */
+           
         if (isHealed)
         {
             PlayerHealing(10);
@@ -70,7 +69,7 @@ public class playerscontrol : MonoBehaviour
         }
         else
         {
-            Invoke("ResetImmune",5f);
+            Invoke("ResetImmune",0.2f);
         }
     }
 
@@ -86,7 +85,7 @@ public class playerscontrol : MonoBehaviour
         if (healtimer)
         {
             healStartTime += Time.deltaTime;
-            health += hp;
+            health =  health >=100 ?  100 : health + hp;
 
             if (healStartTime >= healDuration)
             {             
@@ -97,4 +96,11 @@ public class playerscontrol : MonoBehaviour
             }
         }
     }
+    public void Gameover()
+    {
+        string scenename = "GameOverLose";
+        SceneManager.LoadScene(scenename);
+    }
+
+
 }

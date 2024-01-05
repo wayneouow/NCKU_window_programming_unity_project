@@ -18,6 +18,7 @@ public class TornatoEnemy : MonoBehaviour
     [SerializeField] float velLimit = 2;
     [SerializeField] float multiplier = 10;
     public LayerMask Ground;
+    public float GroundTest = 1f;
     [SerializeField] bool grounded;
     [SerializeField] float jumpForce = 1;
 
@@ -38,6 +39,7 @@ public class TornatoEnemy : MonoBehaviour
     public float AttackCoolDown = 0.7f;
     public bool isAttacking = false;
     public float atk = 10;
+    public float atk2 = 10;
     public GameObject atkParticle;
 
     [Header("Sound")]
@@ -67,9 +69,10 @@ public class TornatoEnemy : MonoBehaviour
                 //Debug.Log("Found");
                 transform.LookAt(player.transform);
                 Vector3 vel = rb.velocity;
-
+                rb.useGravity = false;
                 if (near)
                 {
+                    rb.useGravity = true;
 
                     //GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
                     //GetComponent<Rigidbody>().AddForce(slowRate * 0.8f * speed * multiplier * Time.deltaTime * transform.forward);
@@ -79,7 +82,7 @@ public class TornatoEnemy : MonoBehaviour
                 if (!near && vel.x > -velLimit && vel.x < velLimit && vel.z > -velLimit && vel.z < velLimit)
                 {
                     Debug.Log("move");
-                    grounded = Physics.Raycast(transform.position, Vector3.down, 1f, Ground);
+                    grounded = Physics.Raycast(transform.position, Vector3.down, GroundTest, Ground);
                     GetComponent<Rigidbody>().AddForce(slowRate * speed * multiplier * Time.deltaTime * transform.forward);
 
                     if (grounded)
@@ -92,6 +95,7 @@ public class TornatoEnemy : MonoBehaviour
             }
             else
             {
+                rb.useGravity = true;
                 transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y, 0f);
                 rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             }
@@ -140,7 +144,7 @@ public class TornatoEnemy : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         float maxlucky = player.GetComponent<playerscontrol>().lucky;
         float lucky = Random.Range(0f, maxlucky);
-        //Debug.Log("隨機幸運"+lucky +"vs 敵人幸運" +luckypoint);
+
         if (lucky <= luckypoint)
         {
             //GameObject RewardEffect = Instantiate(RewardEffectPrefab, transform.position, Quaternion.identity);
@@ -167,7 +171,7 @@ public class TornatoEnemy : MonoBehaviour
             //torna.AddForce(transform.up * 1f, ForceMode.Impulse);
             Destroy(torna.gameObject,4f);
         }
-        //player.GetComponent<PlayerValue>().HP -= atk;
+        player.GetComponent<playerscontrol>().health -= atk2;
     }
     private void AttackReset()
     {

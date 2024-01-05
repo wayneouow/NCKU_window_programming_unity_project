@@ -39,7 +39,7 @@ public class ProjectileGun : MonoBehaviour
 
     public CamRecoil camrecoil;
 
-    
+    public AudioClip gunSound; 
 
     public float recoilX;
     public float recoilY;
@@ -121,6 +121,10 @@ public class ProjectileGun : MonoBehaviour
         //Add forces to bullet
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
+
+        if(GetComponent<AudioSource>())
+            GetComponent<AudioSource>().PlayOneShot(gunSound);
+
 
         //Instantiate muzzle flash, if you have one
         if (muzzleFlash != null)

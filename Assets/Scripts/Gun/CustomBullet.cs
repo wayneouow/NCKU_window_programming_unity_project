@@ -25,6 +25,7 @@ public class CustomBullet : MonoBehaviour
     int collisions;
     PhysicMaterial physics_mat;
 
+    public AudioClip explosionSound;
     private void Start()
     {
         Setup();
@@ -44,6 +45,13 @@ public class CustomBullet : MonoBehaviour
     {
         //Instantiate explosion
         if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
+
+        if (GetComponent<AudioSource>())
+        {
+            GetComponent<AudioSource>().PlayOneShot(explosionSound);
+
+        }
+            
 
         //Check for enemies 
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
