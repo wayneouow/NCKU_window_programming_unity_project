@@ -2641,7 +2641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4028c98198c77d54692374cd01f7611d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: winter
+  scenename: SelectMap
 --- !u!1001 &307584782
 PrefabInstance:
   m_ObjectHideFlags: 0

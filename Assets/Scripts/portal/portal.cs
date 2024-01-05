@@ -11,7 +11,6 @@ public class portal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            string scenename = "Winter";
             SceneManager.LoadScene(scenename);
         }
     }

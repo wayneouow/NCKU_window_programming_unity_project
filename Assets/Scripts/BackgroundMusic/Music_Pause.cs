@@ -11,7 +11,7 @@ public class Music_Pause : MonoBehaviour
 
     private void Start()
     {
-        musicPlayer = FindObjectOfType<AudioSource>();
+        musicPlayer = GetComponent<AudioSource>();
         Music_on.interactable = true;
     }
     void Update()
