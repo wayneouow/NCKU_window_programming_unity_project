@@ -7841,9 +7841,10 @@ MonoBehaviour:
     "Q" to drop
     gun
 
-    "1" to freeze monsters
+    "1"with"click mouse scroll" to freeze monsters
 
-    "2"to healing
+    "2"with"click mouse
+    scroll"to healing
 
 '
   m_isRightToLeft: 0

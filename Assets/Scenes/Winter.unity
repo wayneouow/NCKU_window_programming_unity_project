@@ -3716,17 +3716,17 @@ PrefabInstance:
     - target: {fileID: 3907679614406300944, guid: 13c990b8270c70b4c9f196019286028c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.39
+      value: 47.44
       objectReference: {fileID: 0}
     - target: {fileID: 3907679614406300944, guid: 13c990b8270c70b4c9f196019286028c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.8
+      value: -2.25
       objectReference: {fileID: 0}
     - target: {fileID: 3907679614406300944, guid: 13c990b8270c70b4c9f196019286028c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -54.71
+      value: -34.74
       objectReference: {fileID: 0}
     - target: {fileID: 3907679614406300944, guid: 13c990b8270c70b4c9f196019286028c,
         type: 3}
@@ -3766,7 +3766,12 @@ PrefabInstance:
     - target: {fileID: 3992058561654064293, guid: 13c990b8270c70b4c9f196019286028c,
         type: 3}
       propertyPath: m_Name
-      value: Portal_forest
+      value: Portal_back
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992058561654064293, guid: 13c990b8270c70b4c9f196019286028c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3780,6 +3785,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1554746711}
+    - targetCorrespondingSourceObject: {fileID: 3992058561654064293, guid: 13c990b8270c70b4c9f196019286028c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1554746713}
   m_SourcePrefab: {fileID: 100100000, guid: 13c990b8270c70b4c9f196019286028c, type: 3}
 --- !u!1001 &270044678
 PrefabInstance:
@@ -6433,6 +6442,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal_desert
       objectReference: {fileID: 0}
+    - target: {fileID: 4617036660772024948, guid: 52c7d057cba585641bb68312c10d7791,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4706116037937865665, guid: 52c7d057cba585641bb68312c10d7791,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -8101,6 +8115,7 @@ MonoBehaviour:
   spawnRadius: 10
   wave: 0
   score: 0
+  win: 0
   BossComing: {fileID: 0}
 --- !u!4 &572607352
 Transform:
@@ -17175,6 +17190,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal_training
       objectReference: {fileID: 0}
+    - target: {fileID: 4752457369876416285, guid: 5ad33d58a66ab154a89c9e88255601e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8724466350249207100, guid: 5ad33d58a66ab154a89c9e88255601e5,
         type: 3}
       propertyPath: CollisionModule.enabled
@@ -19788,7 +19808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400984, guid: 2ab0d6d1cd4ccd04da61209f2675fd94, type: 3}
       propertyPath: m_LocalScale.z
-      value: -4.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400984, guid: 2ab0d6d1cd4ccd04da61209f2675fd94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21221,7 +21241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4028c98198c77d54692374cd01f7611d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: Forest
+  scenename: Training
 --- !u!65 &1554746712
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21243,6 +21263,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.7}
   m_Center: {x: -0.0000019073486, y: 0.00075000525, z: 0.0000061392784}
+--- !u!54 &1554746713
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554746710}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!4 &1559281278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 443204, guid: 7d88a0a8be53f244b88192f9c7ba255b,
@@ -24068,6 +24115,7 @@ GameObject:
   - component: {fileID: 1701067570}
   - component: {fileID: 1701067569}
   - component: {fileID: 1701067571}
+  - component: {fileID: 1701067572}
   m_Layer: 0
   m_Name: SpawnEnemy (1)
   m_TagString: Untagged
@@ -24101,6 +24149,7 @@ MonoBehaviour:
   spawnRadius: 10
   wave: 0
   score: 0
+  win: 0
   BossComing: {fileID: 8300000, guid: 1be6d6bdab6bf4744a20e3bb9cff59db, type: 3}
 --- !u!4 &1701067570
 Transform:
@@ -24213,6 +24262,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1701067572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701067568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6d6c8e610f20b40bb69cde7416f247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myObject: {fileID: 1554746710}
 --- !u!1001 &1705952166
 PrefabInstance:
   m_ObjectHideFlags: 0

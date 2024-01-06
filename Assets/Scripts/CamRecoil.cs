@@ -28,12 +28,12 @@ public class CamRecoil : MonoBehaviour
         {
             GameObject weapon = GameObject.Find("ItemHoldingR");
             int index = weapon.GetComponent<WeaponSwitching>().selectedWeapon;
-            Debug.Log(weapon.transform);
+            //Debug.Log(weapon.transform);
             foreach (Transform child in weapon.transform)
             {
                 if (child.gameObject.activeSelf)
                 {
-                    Debug.Log($"The child {child.name} is active!");
+                    //Debug.Log($"The child {child.name} is active!");
                     if (index == 0)
                     {
                         recoilX = 0;
